@@ -24,8 +24,6 @@ if (isset($_SESSION['auth'])){
     echo "</body>";
     echo "</html>";
 }else{
-
     redirect("login.php");
 }
-
 ?>
