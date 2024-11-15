@@ -40,8 +40,12 @@ include_once '../lib/helpers.php';
             </form>
 
             <form class="form-signup" action="" method="post" name="form">
-                <label for="fullname">Full name</label>
-                <input class="form-styling" type="text" name="fullname" placeholder="" />
+                <div class="juntar2">
+                    <label for="fullname">Nombres</label>
+                    <input class="form-styling" type="text" name="nombre" placeholder="" />
+                    <label for="fullname">Apellidos</label>
+                    <input class="form-styling" type="text" name="apellido" placeholder="" />
+                </div>
                 <label for="email">Email</label>
                 <input class="form-styling" type="email" name="email" placeholder="" />
                 <label for="password">Password</label>
