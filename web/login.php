@@ -17,7 +17,7 @@ include_once '../lib/helpers.php';
 <div class="container">
     <div class="frame">
         <div class="nav">
-            <ul class="links">
+            <ul class"links">
                 <li class="signin-active"><a class="btn">Iniciar sesion</a></li>
                 <li class="signup-inactive"><a class="btn">Registrate</a></li>
             </ul>
@@ -40,18 +40,28 @@ include_once '../lib/helpers.php';
             </form>
 
             <form class="form-signup" action="" method="post" name="form">
-                <div class="juntar2">
-                    <label for="fullname">Nombres</label>
-                    <input class="form-styling" type="text" name="nombre" placeholder="" />
-                    <label for="fullname">Apellidos</label>
-                    <input class="form-styling" type="text" name="apellido" placeholder="" />
+                <div class="juntardos">
+                    <div>
+                        <label for="fullname">Nombres</label>
+                        <input class="form-styling" type="text" name="nombre" placeholder="" />
+                    </div>
+                    <div>
+                        <label for="fullname">Apellidos</label>
+                        <input class="form-styling" type="text" name="apellido" placeholder="" />
+                    </div>
                 </div>
                 <label for="email">Email</label>
                 <input class="form-styling" type="email" name="email" placeholder="" />
-                <label for="password">Password</label>
-                <input class="form-styling" type="password" name="password" placeholder="" />
-                <label for="confirmpassword">Confirm password</label>
-                <input class="form-styling" type="password" name="confirmpassword" placeholder="" />
+                <div class="juntardos">
+                    <div>
+                        <label for="password">Password</label>
+                        <input class="form-styling" type="password" name="password" placeholder="" />
+                    </div>
+                    <div>
+                        <label for="confirmpassword">Confirm password</label>
+                        <input class="form-styling" type="password" name="confirmpassword" placeholder="" />
+                    </div>
+                </div>
                 <button type="submit" class="btn-signup">Registrate</button>
             </form>
         </div>
