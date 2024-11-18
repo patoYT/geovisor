@@ -43,11 +43,11 @@ include_once '../lib/helpers.php';
                 <div class="juntardos">
                     <div>
                         <label for="fullname">Nombres</label>
-                        <input class="form-styling" type="text" name="nombre" placeholder="" />
+                        <input class="form-styling-two" type="text" name="nombre" placeholder="" />
                     </div>
                     <div>
                         <label for="fullname">Apellidos</label>
-                        <input class="form-styling" type="text" name="apellido" placeholder="" />
+                        <input class="form-styling-two" type="text" name="apellido" placeholder="" />
                     </div>
                 </div>
                 <label for="email">Email</label>
@@ -55,11 +55,11 @@ include_once '../lib/helpers.php';
                 <div class="juntardos">
                     <div>
                         <label for="password">Password</label>
-                        <input class="form-styling" type="password" name="password" placeholder="" />
+                        <input class="form-styling-two" type="password" name="password" placeholder="" />
                     </div>
                     <div>
                         <label for="confirmpassword">Confirm password</label>
-                        <input class="form-styling" type="password" name="confirmpassword" placeholder="" />
+                        <input class="form-styling-two" type="password" name="confirmpassword" placeholder="" />
                     </div>
                 </div>
                 <button type="submit" class="btn-signup">Registrate</button>
