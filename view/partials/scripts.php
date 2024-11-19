@@ -26,7 +26,8 @@
 <script src="assets/js/plugin/jsvectormap/world.js"></script>
 
 <!-- Sweet Alert -->
-<script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script> -->
 
 <!-- Kaiadmin JS -->
 <script src="assets/js/kaiadmin.min.js"></script>
