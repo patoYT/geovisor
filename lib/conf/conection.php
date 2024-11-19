@@ -23,22 +23,27 @@ private function setConnect(){
 
 }
 
-private function connect(){
-    $this->link=mysqli_connect($this->host,$this->user,$this->pass,$this->database);
-    if($this->link){
-        //echo"Conexion exitosa <br>";
-    }else{
-        die(mysqli_error($this->link));
+private function connect()
+    {
+        //en PG primero creo una cadena de conexión para conectarse a una base de datos PostgreSQL
+        $conn_string = "host=$this->host port=$this->port dbname=$this->database user=$this->user password=$this->pass";
+        $this->link = pg_connect($conn_string);
+        //Aquí se está creando una cadena de conexión para conectarse a una base de datos PostgreSQL
+        if ($this->link) {
+            echo"Conexion exitosa <br>";
+        } else {
+            die(pg_last_error($this->link));
+        }
     }
-    
-}
 
-public function getConnect(){
-    return $this->link;
-}
-public function close(){
-    mysqli_close($this->link);
-}
+    public function getConnect()
+    {
+        return $this->link;
+    }
+    public function close()
+    {
+        pg_close($this->link);
+    }
 }
 
 
