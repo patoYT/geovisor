@@ -52,8 +52,8 @@ include_once '../lib/helpers.php';
                 </div>
                 <div class="juntardos">
                     <div class="col-md-4">
-                        <label for="usu_rol">Rol</label>
-                        <select name="usu_rol" class="form-control">
+                        <label for="td">Tipo de documento</label>
+                        <select name="td" class="form-styling-two">
                             <option value="">Seleccione...</option>
                             <?php
                             foreach ($tipodedocumentos as $tipodedocumento) {
@@ -67,8 +67,16 @@ include_once '../lib/helpers.php';
                         <input class="form-styling-two" type="text" name="nombre" placeholder="" />
                     </div>
                 </div>
-                <label for="email">Email</label>
-                <input class="form-styling" type="email" name="email" placeholder="" />
+                <div class="juntardos">
+                <div>
+                        <label for="telefono">Telefono</label>
+                        <input class="form-styling-two" type="text" name="telefono" placeholder="" />
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input class="form-styling-two" type="email" name="email" placeholder="" />
+                    </div>
+                </div>
                 <div class="juntardos">
                     <div>
                         <label for="password">Password</label>
