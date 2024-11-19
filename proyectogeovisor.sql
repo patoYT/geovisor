@@ -1,41 +1,31 @@
+-- Active: 1730128443239@@127.0.0.1@5432@proyectogeovisor
 CREATE DATABASE proyectogeovisor;
 
-CREATE TABLE usuarios (
-  id SERIAL PRIMARY KEY,
-  nombre VARCHAR(50) NOT NULL,
-  apellido VARCHAR(50) NOT NULL,
-  cedula VARCHAR(20) UNIQUE NOT NULL,
-  email VARCHAR(100) UNIQUE NOT NULL,
-  telefono VARCHAR(20) NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  creado_en TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+
 
 CREATE TABLE roles (
-  id SERIAL PRIMARY KEY,
-  nombre VARCHAR(50) NOT NULL
+  rol_id SERIAL PRIMARY KEY,
+  rol_nombre VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE usuarios_roles (
-  usuario_id INTEGER NOT NULL,
-  rol_id INTEGER NOT NULL,
-  PRIMARY KEY (usuario_id, rol_id),
-  FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
-  FOREIGN KEY (rol_id) REFERENCES roles(id)
+CREATE TABLE tipoDeDocumento (
+  td_id SERIAL PRIMARY KEY,
+  td_nombre VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE usuarios (
-  id_usuario SERIAL PRIMARY KEY,
-  tipo_documento VARCHAR(50) NOT NULL,
-  numero_identificacion VARCHAR(20) UNIQUE NOT NULL,
-  nombres VARCHAR(50) NOT NULL,
-  apellidos VARCHAR(50) NOT NULL,
-  contrasena VARCHAR(255) NOT NULL,
-  correo_electronico VARCHAR(100) UNIQUE NOT NULL,
-  telefono VARCHAR(20) NOT NULL,
-  direccion VARCHAR(255) NOT NULL,
-  rol INTEGER NOT NULL,
-  FOREIGN KEY (rol) REFERENCES roles(id_rol)
+  usu_id SERIAL PRIMARY KEY,
+  usu_td INTEGER NOT NULL,
+  usu_numeroDocumento VARCHAR(20) UNIQUE NOT NULL,
+  usu_nombre VARCHAR(50) NOT NULL,
+  usu_apellido VARCHAR(50) NOT NULL,
+  usu_password VARCHAR(255) NOT NULL,
+  usu_correo VARCHAR(100) UNIQUE NOT NULL,
+  usu_telefono VARCHAR(20) NOT NULL,
+  usu_direccion VARCHAR(255) NOT NULL,
+  usu_rol INTEGER NOT NULL,
+  Foreign Key (usu_td) REFERENCES tipoDeDocumento(td_id),
+  FOREIGN KEY (usu_rol) REFERENCES roles(rol_id)
 );
 
 CREATE TABLE solicitudes (
