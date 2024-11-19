@@ -50,6 +50,23 @@ include_once '../lib/helpers.php';
                         <input class="form-styling-two" type="text" name="apellido" placeholder="" />
                     </div>
                 </div>
+                <div class="juntardos">
+                    <div class="col-md-4">
+                        <label for="usu_rol">Rol</label>
+                        <select name="usu_rol" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <?php
+                            foreach ($tipodedocumentos as $tipodedocumento) {
+                                echo "<option value='" . $tipodedocumentos['td_id'] . "'>" . $tipodedocumento['td_nombre'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="numerodocumento">N° de documento</label>
+                        <input class="form-styling-two" type="text" name="nombre" placeholder="" />
+                    </div>
+                </div>
                 <label for="email">Email</label>
                 <input class="form-styling" type="email" name="email" placeholder="" />
                 <div class="juntardos">
