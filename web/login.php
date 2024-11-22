@@ -1,6 +1,5 @@
 <?php
 include_once '../lib/helpers.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
