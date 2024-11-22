@@ -1,6 +1,5 @@
 <?php
 include_once '../lib/helpers.php';
-include_once '../view/partials/scripts.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
