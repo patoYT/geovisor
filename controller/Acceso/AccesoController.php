@@ -3,6 +3,24 @@
 include_once '../model/Acceso/AccesoModel.php';
 class AccesoController
 {
+    
+    public function getCreate()
+    {
+        $obj = new AccesoModel();
+
+        $sql = "SELECT * FROM tipodedocumento";
+        $tipodedocumentos = $obj->consult($sql);
+
+        $sql = "SELECT * FROM barrios";
+        $barrios = $obj->consult($sql); 
+        
+        $sql = "SELECT * FROM tipo_via";
+        $tipo_via = $obj->consult($sql); 
+
+        include_once 'login.php';
+    }
+
+
     public function postCreation()
     {
 
@@ -10,6 +28,9 @@ class AccesoController
         $prueba = false;
         $user = $_POST['user'];
         $pass = $_POST['pass'];
+        //Aqui obtengo los datos del formulario en este caso El nombre y la contraseña
+
+        //Nota tengo que corregir el sql :C
         $sql =  "SELECT * FROM usuarios WHERE usu_correo = '$user'";
         $usuario = $obj->consult($sql);
 
@@ -31,6 +52,7 @@ class AccesoController
                 }
             }
             //Este es para cuando no hay usuarios
+            //pero igual le digo lo mismo para no darle informacion
         } else {
             $_SESSION['errores']['inicio_secion'] = "Usuario y/o contraseña incorrectos";
             redirect("index.php");

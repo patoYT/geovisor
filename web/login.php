@@ -1,5 +1,33 @@
 <?php
 include_once '../lib/helpers.php';
+include_once '../view/partials/scripts.php';
+?>
+
+<?php
+if (isset($_SESSION['errores'])) {
+    if ($_SESSION['errores'] == "Completado") {
+?>
+    <script>
+        Swal.fire({
+            title: "Completado",
+            text: "Se guardo en la base de datos",
+            icon: "success"
+        });
+</script>
+<?php
+} else {
+?>
+    <script>
+        Swal.fire({
+            title: "Error",
+            text: "Usuario y/o contraseña incorrectos",
+            icon: "error"
+        });
+    </script>
+<?php
+    }
+}
+unset($_SESSION['errores']);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -84,7 +112,7 @@ include_once '../lib/helpers.php';
                             <option value="">Seleccione...</option>
                             <?php
                             foreach ($tipodedocumentos as $tipodedocumento) {
-                                echo "<option value='" . $tipodedocumentos['td_id'] . "'>" . $tipodedocumento['td_nombre'] . "</option>";
+                                echo "<option value='" . $tipodedocumento['td_id'] . "'>" . $tipodedocumento['td_nombre'] . "</option>";
                             }
                             ?>
                         </select>
@@ -95,7 +123,7 @@ include_once '../lib/helpers.php';
                     </div>
                 </div>
                 <div class="juntardos">
-                <div>
+                    <div>
                         <label for="telefono">Telefono</label>
                         <input class="form-styling-two" type="text" name="telefono" placeholder="" />
                     </div>
