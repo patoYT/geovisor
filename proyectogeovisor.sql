@@ -1,4 +1,4 @@
--- Active: 1730128443239@@127.0.0.1@5432@proyectogeovisor
+-- Active: 1729519566808@@127.0.0.1@5432@proyectogeovisor
 CREATE DATABASE proyectogeovisor;
 
 
@@ -8,10 +8,81 @@ CREATE TABLE roles (
   rol_nombre VARCHAR(50) NOT NULL
 );
 
+INSERT INTO roles ( rol_nombre) 
+VALUES 
+( 'Administrador'),
+( 'Funcionario'),
+( 'Ciudadano');
+
 CREATE TABLE tipoDeDocumento (
   td_id SERIAL PRIMARY KEY,
   td_nombre VARCHAR(50) NOT NULL
 );
+
+INSERT INTO tipoDeDocumento (td_nombre) 
+VALUES 
+('Cédula de Ciudadanía'),
+('Tarjeta de Identidad'),
+('Registro Civil'),
+('Pasaporte'),
+('Cédula de Extranjería');
+
+CREATE TABLE tipo_via (
+  tv_id SERIAL PRIMARY KEY,
+  tv_nombre VARCHAR(50) NOT NULL
+);
+
+INSERT INTO tipo_via (tv_nombre) 
+VALUES 
+('Calle'),
+('Carrera'),
+('Avenida'),
+('Diagonal'),
+('Transversal'),
+('Circular'),
+('Paseo'),
+('Bulevar'),
+('Autopista'),
+('Carretera'),
+('Camino'),
+('Sendero'),
+('Pasaje'),
+('Callejón'),
+('Plaza');
+
+CREATE TABLE barrios (
+  id_barrio SERIAL PRIMARY KEY,
+  nombre_barrio VARCHAR(100) NOT NULL,
+  comuna INTEGER NOT NULL
+);
+
+INSERT INTO barrios (nombre_barrio, comuna) 
+VALUES 
+('Ulpiano Lloreda', 13),
+('Charco Azul', 13),
+('Ciudad Córdoba', 13),
+('Lleras Restrepo I', 13),
+('Lleras Restrepo II', 13),
+('Ricardo Bálcázar', 13),
+('José Manuel', 13),
+('Marroquín III', 13),
+('Omar Torrijos', 13),
+('Rodrigo Lara Bonilla', 13),
+('Los Comuneros II', 13),
+('Los Lagos', 13),
+('Los Robles', 13),
+('Calipso', 13),
+('San Carlos', 13),
+('Yira Castro', 13),
+('El Pondaje', 13),
+('Villa Blanca', 13),
+('El Lago', 13),
+('Villa del Lago', 13),
+('Nuevo Horizonte', 13),
+('La Paz', 13),
+('Los Lagos II', 13),
+('El Diamante', 13);
+
 
 CREATE TABLE usuarios (
   usu_id SERIAL PRIMARY KEY,
@@ -22,8 +93,17 @@ CREATE TABLE usuarios (
   usu_password VARCHAR(255) NOT NULL,
   usu_correo VARCHAR(100) UNIQUE NOT NULL,
   usu_telefono VARCHAR(20) NOT NULL,
-  usu_direccion VARCHAR(255) NOT NULL,
+  usu_tipo_via INTEGER,              -- Ejemplo: Calle, Carrera, Avenida
+  usu_numero_via INT NOT NULL,                   -- Número de la vía principal
+  usu_tipo_via_interseccion INTEGER,          -- Ejemplo: Carrera, Diagonal (opcional)
+  usu_numero_interseccion INT,                    -- Número de la vía secundaria (opcional)
+  usu_numero_adicional VARCHAR(10),               -- Número adicional (opcional)
+  usu_barrio INTEGER,                  -- Barrio o sector (opcional)
+  usu_complemento VARCHAR(100),
   usu_rol INTEGER NOT NULL,
+  Foreign Key (usu_tipo_via) REFERENCES tipo_via(tv_id),
+  Foreign Key (usu_tipo_via_interseccion) REFERENCES tipo_via(tv_id),
+  Foreign Key (usu_barrio) REFERENCES barrios(id_barrio),
   Foreign Key (usu_td) REFERENCES tipoDeDocumento(td_id),
   FOREIGN KEY (usu_rol) REFERENCES roles(rol_id)
 );
