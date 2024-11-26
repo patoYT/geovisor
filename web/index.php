@@ -22,6 +22,8 @@ include_once '../view/partials/header.php';
     include_once '../view/partials/scripts.php';
     echo "</body>";
     echo "</html>";
-// } else {
-//     redirect("login.php");
-// }
+} else {
+    include '../controller/Acceso/AccesoController.php';
+    $loginController = new AccesoController();
+    $loginController->getCreate();
+}

@@ -1,5 +1,33 @@
 <?php
 include_once '../lib/helpers.php';
+include_once '../view/partials/scripts.php';
+?>
+
+<?php
+if (isset($_SESSION['errores'])) {
+    if ($_SESSION['errores'] == "Completado") {
+?>
+    <script>
+        Swal.fire({
+            title: "Completado",
+            text: "Se guardo en la base de datos",
+            icon: "success"
+        });
+</script>
+<?php
+} else {
+?>
+    <script>
+        Swal.fire({
+            title: "Error",
+            text: "Usuario y/o contraseña incorrectos",
+            icon: "error"
+        });
+    </script>
+<?php
+    }
+}
+unset($_SESSION['errores']);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -16,20 +44,20 @@ include_once '../lib/helpers.php';
 <div class="container">
     <div class="frame">
         <div class="nav">
-            <ul class"links">
+            <ul>
                 <li class="signin-active"><a class="btn">Iniciar sesion</a></li>
                 <li class="signup-inactive"><a class="btn">Registrate</a></li>
             </ul>
         </div>
         <div ng-app ng-init="checked = false">
-            <form class="form-signin" action="" method="post" name="form">
+            <form class="form-signin" action="<?php echo getUrl("Acceso", "Acceso", "postCreation", false, "ajax"); ?>" method="post" name="form" id="form">
                 <div class="divsesion">
                     <img src="../img/iniciar-sesion.png" alt="Iniciar secion" class="iniciarsesion">
                 </div>
-                <label for="username">Usuario</label>
-                <input class="form-styling" type="text" name="username" placeholder="" />
+                <label for="email">Usuario</label>
+                <input class="form-styling" type="email" name="user" id="user" placeholder="" require />
                 <label for="password">Contraseña</label>
-                <input class="form-styling" type="password" name="password" placeholder="" />
+                <input class="form-styling" type="password" name="pass" id="pass" placeholder="" />
                 <div class="btn-animate">
                     <button type="submit" class="btn-signin">Iniciar sesion</button>
                 </div>
@@ -56,7 +84,7 @@ include_once '../lib/helpers.php';
                             <option value="">Seleccione...</option>
                             <?php
                             foreach ($tipodedocumentos as $tipodedocumento) {
-                                echo "<option value='" . $tipodedocumentos['td_id'] . "'>" . $tipodedocumento['td_nombre'] . "</option>";
+                                echo "<option value='" . $tipodedocumento['td_id'] . "'>" . $tipodedocumento['td_nombre'] . "</option>";
                             }
                             ?>
                         </select>
@@ -67,7 +95,7 @@ include_once '../lib/helpers.php';
                     </div>
                 </div>
                 <div class="juntardos">
-                <div>
+                    <div>
                         <label for="telefono">Telefono</label>
                         <input class="form-styling-two" type="text" name="telefono" placeholder="" />
                     </div>
