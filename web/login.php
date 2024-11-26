@@ -2,33 +2,6 @@
 include_once '../lib/helpers.php';
 include_once '../view/partials/scripts.php';
 ?>
-
-<?php
-if (isset($_SESSION['errores'])) {
-    if ($_SESSION['errores'] == "Completado") {
-?>
-    <script>
-        Swal.fire({
-            title: "Completado",
-            text: "Se guardo en la base de datos",
-            icon: "success"
-        });
-</script>
-<?php
-} else {
-?>
-    <script>
-        Swal.fire({
-            title: "Error",
-            text: "Usuario y/o contraseña incorrectos",
-            icon: "error"
-        });
-    </script>
-<?php
-    }
-}
-unset($_SESSION['errores']);
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -43,6 +16,32 @@ unset($_SESSION['errores']);
 </head>
 
 <div class="container">
+    <?php
+    if (isset($_SESSION['errores']['inicio_secion'])) {
+        if ($_SESSION['errores'] == "Completado") {
+    ?>
+            <script>
+                Swal.fire({
+                    title: "Completado",
+                    text: "Se guardo en la base de datos",
+                    icon: "success"
+                });
+            </script>
+        <?php
+        } else {
+        ?>
+            <script>
+                Swal.fire({
+                    title: "Error",
+                    text: "Usuario y/o contraseña incorrectos",
+                    icon: "error"
+                });
+            </script>
+    <?php
+        }
+    }
+    unset($_SESSION['errores']);
+    ?>
     <div class="frame">
         <div class="nav">
             <ul>
