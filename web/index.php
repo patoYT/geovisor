@@ -1,7 +1,7 @@
 <?php
-include_once '../lib/helpers.php';
-include_once '../view/partials/header.php';
-//if (isset($_SESSION['auth'])) {
+    include_once '../lib/helpers.php';
+if (isset($_SESSION['auth'])) {
+    include_once '../view/partials/header.php';
     echo "<body>";
     echo "<div class='wrapper'>";
     include_once '../view/partials/sidebar.php';
@@ -27,3 +27,4 @@ include_once '../view/partials/header.php';
     $loginController = new AccesoController();
     $loginController->getCreate();
 }
+?>
