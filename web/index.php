@@ -23,5 +23,7 @@ if (isset($_SESSION['auth'])) {
     echo "</body>";
     echo "</html>";
 } else {
-    redirect("login.php");
+    include '../controller/Acceso/AccesoController.php';
+    $loginController = new AccesoController();
+    $loginController->getCreate();
 }

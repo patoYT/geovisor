@@ -9,10 +9,9 @@
             return $result;
         }
 
-        public function consult($sql){
-            $result = pg_query($this->getConnect(),$sql);
-
-            return $result;
+        public function consult($sql) {
+            $result = pg_query($this->getConnect(), $sql);
+            return pg_fetch_all($result); // Esto devuelve un array de todos los resultados
         }
 
         public function uptade($sql){

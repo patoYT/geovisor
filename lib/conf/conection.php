@@ -30,7 +30,7 @@ private function connect()
         $this->link = pg_connect($conn_string);
         //Aquí se está creando una cadena de conexión para conectarse a una base de datos PostgreSQL
         if ($this->link) {
-            echo"Conexion exitosa <br>";
+            //echo"Conexion exitosa <br>";
         } else {
             die(pg_last_error($this->link));
         }
