@@ -246,3 +246,78 @@ INSERT INTO estados (nombre_estado, tabla_pertenece)
 VALUES 
 ('Habilitada', 'usuario'),
 ('Inhabilitada', 'usuario');
+
+-- Fecha del accidente
+-- ✓ Dirección – coordenadas Accidente.
+-- ✓ Clase vehículos involucrados:Automóvil, bus, buseta, camión,
+-- camioneta, campero, microbús, tractocamión, volqueta,
+-- motocicleta, bicicleta, motocarro, cuatrimoto.
+-- ✓ Tipo de choque:
+-- ▪ Colisión entre vehículos (carro con carro, carro con moto,
+-- bus con bicicleta, etc.).
+-- ▪ Colisión con objeto fijo (poste, señal de tránsito, árbol,
+-- etc.).
+-- ▪ Atropello (peatón, animal).
+-- ▪ volcamiento.
+-- ▪ Otro (con espacio para especificar).
+-- ✓ Imagen. (Formato JPG, JPEG, PNG).
+-- ✓ Lesionados.(Abarca cualquier persona que haya sido afectada
+-- físicamente en un accidente, ya sea un peatón, conductor,
+-- pasajero u ocupante de un vehículo).
+-- ✓ Observación. (Espacio para colocar información relevante del
+-- accidente reportado).
+
+CREATE TABLE tipo_choque (
+  id_tipo_choque SERIAL PRIMARY KEY,
+  nombre_tipo_choque VARCHAR(50) NOT NULL
+);
+
+INSERT INTO tipo_choque (nombre_tipo_choque) 
+VALUES 
+('Colisión entre vehículos'),
+('Colisión con objeto fijo'),
+('Atropello'),
+('Volcamiento'),
+('Otro');
+
+CREATE TABLE subtipo_choque (
+  id_subtipo_choque SERIAL PRIMARY KEY,
+  id_tipo_choque INTEGER NOT NULL,
+  nombre_subtipo_choque VARCHAR(100) NOT NULL,
+  FOREIGN KEY (id_tipo_choque) REFERENCES tipo_choque(id_tipo_choque)
+);
+
+INSERT INTO subtipo_choque (id_tipo_choque, nombre_subtipo_choque) 
+VALUES 
+(1, 'Carro con carro'),
+(1, 'Carro con moto'),
+(1, 'Moto con moto'),
+(1, 'Bus con bicicleta'),
+(2, 'Poste'),
+(2, 'Señal de tránsito'),
+(2, 'Árbol'),
+(3, 'Peatón'),
+(3, 'Animal'),
+(4, 'Volcamiento'),
+(5, 'Otro');
+
+CREATE TABLE clase_vehiculos (
+  id_clase_vehiculo SERIAL PRIMARY KEY,
+  nombre_clase_vehiculo VARCHAR(50) NOT NULL
+);
+
+INSERT INTO clase_vehiculos (nombre_clase_vehiculo) 
+VALUES 
+('Automóvil'),
+('Bus'),
+('Buseta'),
+('Camión'),
+('Camioneta'),
+('Campero'),
+('Microbús'),
+('Tractocamión'),
+('Volqueta'),
+('Motocicleta'),
+('Bicicleta'),
+('Motocarro'),
+('Cuatrimoto');

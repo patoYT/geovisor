@@ -86,39 +86,23 @@
                     <div class="collapse" id="sidebarLayouts">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="sidebar-style-2.html">
+                                <a href="<?php echo getUrl("Accidentes", "Accidentes", "getCreate"); ?>">
                                     <span class="sub-item">Accidentes</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="icon-menu.html">
-                                    <span class="sub-item">Señalizaciones viales en mal estado</span>
+                                <a href="<?php echo getUrl("Reductores", "Reductores", "getCreate"); ?>">
+                                    <span class="sub-item">Reductores de velocidad</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="icon-menu.html">
-                                    <span class="sub-item">Nueva señalización vial</span>
+                                <a href="<?php echo getUrl("Señalizacion", "Señalizacion", "getCreate"); ?>">
+                                    <span class="sub-item">Señalización vial</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="icon-menu.html">
-                                    <span class="sub-item">Reductores de velocidad en mal 
-                                    estado</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="icon-menu.html">
-                                    <span class="sub-item">Nuevo reductor de velocidad</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="icon-menu.html">
-                                    <span class="sub-item">La vía pública en mal estado</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="icon-menu.html">
-                                    <span class="sub-item">PQRS</span>
+                                <a href="<?php echo getUrl("Vial", "Vial", "getCreate"); ?>">
+                                    <span class="sub-item">Malla vial</span>
                                 </a>
                             </li>
                         </ul>
