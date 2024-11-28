@@ -3,12 +3,13 @@
     <div class="sidebar-logo">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
-            <a href="index.html" class="logo">
-                <img
-                    src="assets/img/kaiadmin/logo_light.svg"
+            <a href="index.html" class="logo mt-4">
+                <img src="../img/logo-pagina-principal.png" alt="logo" width="200px" height="75px">
+                <!-- <img
+                    src="../../img/iniciar-sesion.png"
                     alt="navbar brand"
                     class="navbar-brand"
-                    height="20" />
+                    height="20" /> -->
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
@@ -51,7 +52,7 @@
                     <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
-                    <h4 class="text-section">Aqui hay que ponerle un nombre</h4>
+                    <h4 class="text-section"><?php echo $_SESSION["Nombre"]." ".$_SESSION["Apellido"]?></h4>
                 </li>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#base">
