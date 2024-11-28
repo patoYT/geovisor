@@ -1,7 +1,4 @@
-<?php
-include_once '../lib/helpers.php';
 
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -28,7 +25,7 @@ include_once '../lib/helpers.php';
                 <div class="divsesion">
                     <img src="../img/iniciar-sesion.png" alt="Iniciar secion" class="iniciarsesion">
                 </div>
-                <label for="email">Usuario</label>
+                <label for="user">Usuario</label>
                 <input class="form-styling" type="email" name="user" id="user" placeholder="" require />
                 <label for="password">Contraseña</label>
                 <input class="form-styling" type="password" name="pass" id="pass" placeholder="" />
@@ -81,14 +78,14 @@ include_once '../lib/helpers.php';
                 <div class="juntardos">
                     <div>
                         <label for="password">Password</label>
-                        <input class="form-styling-two" type="passwo     rd" name="password" id="password" placeholder="" />
+                        <input class="form-styling-two" type="password" name="password" id="password" placeholder="" />
                     </div>
                     <div>
                         <label for="confirmpassword">Confirm password</label>
                         <input class="form-styling-two" type="password" name="confirmpassword" placeholder="" />
                     </div>
                 </div>
-                <div class="m">
+                <div>
                     <label for="direccion">
                         <p><b>Direccion</b></p>
                     </label>
