@@ -16,32 +16,6 @@ include_once '../view/partials/scripts.php';
 </head>
 
 <div class="container">
-    <?php
-    if (isset($_SESSION['errores']['inicio_secion'])) {
-        if ($_SESSION['errores'] == "Completado") {
-    ?>
-            <script>
-                Swal.fire({
-                    title: "Completado",
-                    text: "Se guardo en la base de datos",
-                    icon: "success"
-                });
-            </script>
-        <?php
-        } else {
-        ?>
-            <script>
-                Swal.fire({
-                    title: "Error",
-                    text: "Usuario y/o contraseña incorrectos",
-                    icon: "error"
-                });
-            </script>
-    <?php
-        }
-    }
-    unset($_SESSION['errores']);
-    ?>
     <div class="frame">
         <div class="nav">
             <ul>
@@ -106,8 +80,8 @@ include_once '../view/partials/scripts.php';
                 </div>
                 <div class="juntardos">
                     <div class="col-md-4">
-                        <label for="td">Tipo de documento</label>
-                        <select name="td" class="form-styling-two">
+                        <label for="td[]">Tipo de documento</label>
+                        <select name="td" id="td" class="form-styling-two">
                             <option value="">Seleccione...</option>
                             <?php
                             foreach ($tipodedocumentos as $tipodedocumento) {
@@ -118,17 +92,17 @@ include_once '../view/partials/scripts.php';
                     </div>
                     <div>
                         <label for="numerodocumento">N° de documento</label>
-                        <input class="form-styling-two" type="text" name="nombre" placeholder="" />
+                        <input class="form-styling-two" type="text" name="numerodocumento" placeholder="" />
                     </div>
                 </div>
                 <div class="juntardos">
                     <div>
                         <label for="telefono">Telefono</label>
-                        <input class="form-styling-two" type="text" name="telefono" placeholder="" />
+                        <input class="form-styling-two" type="text" name="telefono" id="telefono" placeholder="" />
                     </div>
                     <div>
                         <label for="email">Email</label>
-                        <input class="form-styling-two" type="email" name="email" placeholder="" />
+                        <input class="form-styling-two" type="email" name="email" id="email" placeholder="" />
                     </div>
                 </div>
                 <div class="juntardos">
