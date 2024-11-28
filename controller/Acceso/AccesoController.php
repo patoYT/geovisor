@@ -26,13 +26,13 @@ class AccesoController
                     redirect("index.php");
                 } else {
                     //Aqui lo mando otra vez al login y le digo que la contraseña no coincide
-                    $_SESSION['errores']['inicio_secion'] = "Usuario y/o contraseña incorrectos";
+                    $_SESSION['errores']['iniciarsesion']['usu_incorrect'] = "Usuario y/o contraseña incorrectos";
                     redirect("index.php");
                 }
             }
             //Este es para cuando no hay usuarios
         } else {
-            $_SESSION['errores']['inicio_secion'] = "Usuario y/o contraseña incorrectos";
+            $_SESSION['errores']['iniciarsesion']['usu_incorrect'] = "Usuario y/o contraseña incorrectos";
             redirect("index.php");
         }
     }

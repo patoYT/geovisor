@@ -11,7 +11,9 @@
     <script src="js/global.js"></script>
 
 </head>
-
+<?php
+    include_once '../controller/Usuarios/UsuariosController.php';
+?>
 <div class="container">
     <div class="frame">
         <div class="nav">
