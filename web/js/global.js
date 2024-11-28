@@ -11,74 +11,7 @@ $(function() {
 });
 
 $(document).ready(function(){
-    $('#form').submit(function(event){
-        event.preventDefault();
-        let mensajes = [];
-        $('#error').html('');
-        let esValido = true;
-    
-        const nombre =  $('#nombre').val().trim();
-    
-        if(nombre === ''){
-            mensajes.push('El campo nombre es obligatorio.');
-            esValido = false;
-        } else {
-            if(ValidarCampoLetras(nombre)){
-                mensajes.push('El campo nombre solo puede tener letras.');
-                esValido = false;
-            }
-        }
-    
-        const apellido =  $('#apellido').val().trim();
-        if(apellido === ''){
-            mensajes.push('el campo apellido es obligatorio.');
-            esValido = false;
-        }else{
-            if(ValidarCampoLetras(apellido)){
-                mensajes.push('El campo apellido solo puede tener letras.');
-                esValido = false;
-            }
-        }
-        
-        const  email =  $('#email').val().trim();
-        const patron = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    
-        if(email === ''){
-            mensajes.push('El campo correo es obligatorio.');
-            esValido = false;
-        } else {
-            if(!patron.test(email)){
-                mensajes.push('El correo no es valido.');
-                esValido = false;
-            }
-        }
-    
-        const contraseña =  $('#contraseña').val().trim();
-        const patronContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    
-        if(contraseña === ''){
-            mensajes.push('El campo contraseña es obligatorio.');
-            esValido = false;
-        } else {
-            if(!patronContrasena.test(contraseña)){
-                mensajes.push('La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un caracter especial.');
-                esValido = false;
-            }
-        }
-        const rol =  $('#rol').val().trim();
-        if(rol === 'Seleccione...'){
-            mensajes.push('El campo rol es obligatorio.');
-            esValido = false;
-        }
-        if(esValido){
-             $("#error").fadeOut(500);
-             $("#error").addClass('d-none');
-            //  this.submit();
-        }else{
-            $('#error').html(mensajes.map(msg => `${msg}<br>`).join(''));
-            $('#error').removeClass('d-none');
-        }
-    });
+
     $(document).on('keyup',"#buscar",function(){
 
         let buscar =  $(this).val();
