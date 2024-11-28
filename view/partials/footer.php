@@ -16,8 +16,8 @@
             </ul>
         </nav>
         <div class="copyright">
-            2024, made with <i class="fa fa-heart heart text-danger"></i> by
-            <a href="http://www.themekita.com">ThemeKita</a>
+            2024, La best pagina <i class="fa fa-heart heart text-danger"></i> por
+            <a href="http://www.themekita.com">Jhon Emmir y Miguel Angel</a>
         </div>
         <div>
             Distributed by
