@@ -7,7 +7,6 @@ class AccesoController
     {
 
         $obj = new AccesoModel();
-        $prueba = false;
         $user = $_POST['user'];
         $pass = $_POST['pass'];
         $sql =  "SELECT * FROM usuarios WHERE usu_correo = '$user'";
@@ -22,6 +21,7 @@ class AccesoController
                     $_SESSION['Nombre'] =  $usu['usu_nombre'];
                     $_SESSION['Apellido'] =  $usu['usu_apellido'];
                     $_SESSION['Correo'] = $usu['usu_correo'];
+                    $_SESSION['id'] = $usu['usu_id'];
                     $_SESSION['auth'] =  "Ok";
                     redirect("index.php");
                 } else {

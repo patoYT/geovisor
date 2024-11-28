@@ -79,36 +79,9 @@ include_once '../lib/helpers.php';
                     </div>
                 </div>
                 <div class="juntardos">
-                    <div class="col-md-4">
-                        <label for="td[]">Tipo de documento</label>
-                        <select name="td" id="td" class="form-styling-two">
-                            <option value="">Seleccione...</option>
-                            <?php
-                            foreach ($tipodedocumentos as $tipodedocumento) {
-                                echo "<option value='" . $tipodedocumento['td_id'] . "'>" . $tipodedocumento['td_nombre'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="numerodocumento">N° de documento</label>
-                        <input class="form-styling-two" type="text" name="numerodocumento" placeholder="" />
-                    </div>
-                </div>
-                <div class="juntardos">
-                    <div>
-                        <label for="telefono">Telefono</label>
-                        <input class="form-styling-two" type="text" name="telefono" id="telefono" placeholder="" />
-                    </div>
-                    <div>
-                        <label for="email">Email</label>
-                        <input class="form-styling-two" type="email" name="email" id="email" placeholder="" />
-                    </div>
-                </div>
-                <div class="juntardos">
                     <div>
                         <label for="password">Password</label>
-                        <input class="form-styling-two" type="password" name="password" id="password" placeholder="" />
+                        <input class="form-styling-two" type="passwo     rd" name="password" id="password" placeholder="" />
                     </div>
                     <div>
                         <label for="confirmpassword">Confirm password</label>

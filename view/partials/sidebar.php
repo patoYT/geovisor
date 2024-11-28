@@ -1,10 +1,8 @@
 <!-- Sidebar -->
-
+7
 <?php
 
-session_start();
-
-$id_usuario = $_SESSION['usu_id'];
+    include_once '../../lib/helpers.php';
 ?>
 
 <div class="sidebar" data-background-color="dark">
@@ -49,7 +47,7 @@ $id_usuario = $_SESSION['usu_id'];
                     <div class="collapse" id="dashboard">
                         <ul class="nav nav-collapse">
                             <li>
-                                <!-- <a href="<?php echo getUrl("Usuarios","Usuarios","getUpdate",array("usu_id"=>$id_usuario)); ?>"> -->
+                                    <a href="<?php echo getUrl("Usuarios","Usuarios","getUpdate",array("usu_id"=>$_SESSION['id'])); ?>">
                                     <span class="sub-item">Mi perfil</span>
                                 </a>
                             </li>
