@@ -23,8 +23,8 @@ if (isset($_SESSION['auth'])) {
     echo "</body>";
     echo "</html>";
 } else {
-    include '../controller/Acceso/AccesoController.php';
-    $loginController = new AccesoController();
+    include '../controller/Usuarios/UsuariosController.php';
+    $loginController = new UsuariosController();
     $loginController->getCreate();
 }
 ?>

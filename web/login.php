@@ -11,36 +11,11 @@ include_once '../view/partials/scripts.php';
     <title>Login</title>
     <link rel="stylesheet" href="login.css">
     <script src="js/jquery.js"></script>
-    <script src="js/login.js"></script>
+    <script src="js/global.js"></script>
+
 </head>
 
 <div class="container">
-    <?php
-    if (isset($_SESSION['errores']['inicio_secion'])) {
-        if ($_SESSION['errores'] == "Completado") {
-    ?>
-            <script>
-                Swal.fire({
-                    title: "Completado",
-                    text: "Se guardo en la base de datos",
-                    icon: "success"
-                });
-            </script>
-        <?php
-        } else {
-        ?>
-            <script>
-                Swal.fire({
-                    title: "Error",
-                    text: "Usuario y/o contraseña incorrectos",
-                    icon: "error"
-                });
-            </script>
-    <?php
-        }
-    }
-    unset($_SESSION['errores']);
-    ?>
     <div class="frame">
         <div class="nav">
             <ul>
@@ -49,7 +24,7 @@ include_once '../view/partials/scripts.php';
             </ul>
         </div>
         <div ng-app ng-init="checked = false">
-            <form class="form-signin" action="<?php echo getUrl("Acceso", "Acceso", "postCreation", false, "ajax"); ?>" method="post" name="form" id="form">
+            <form class="form-signin" action="<?php echo getUrl("Acceso", "Acceso", "postCreation", false, "ajax"); ?>" method="post" name="form-sigin" id="form-sigin">
                 <div class="divsesion">
                     <img src="../img/iniciar-sesion.png" alt="Iniciar secion" class="iniciarsesion">
                 </div>
@@ -65,21 +40,21 @@ include_once '../view/partials/scripts.php';
                 </div>
             </form>
 
-            <form class="form-signup" action="" method="post" name="form">
+            <form class="form-signup" action="<?php echo getUrl("Usuarios", "Usuarios", "postCreate", false, "ajax"); ?>" method="post" name="form-signup" id="form-signup">
                 <div class="juntardos">
                     <div>
                         <label for="fullname">Nombres</label>
-                        <input class="form-styling-two" type="text" name="nombre" placeholder="" />
+                        <input class="form-styling-two" type="text" name="nombre" id="nombre" placeholder="" />
                     </div>
                     <div>
                         <label for="fullname">Apellidos</label>
-                        <input class="form-styling-two" type="text" name="apellido" placeholder="" />
+                        <input class="form-styling-two" type="text" name="apellido" id="apellido" placeholder="" />
                     </div>
                 </div>
                 <div class="juntardos">
                     <div class="col-md-4">
-                        <label for="td">Tipo de documento</label>
-                        <select name="td" class="form-styling-two">
+                        <label for="td[]">Tipo de documento</label>
+                        <select name="td" id="td" class="form-styling-two">
                             <option value="">Seleccione...</option>
                             <?php
                             foreach ($tipodedocumentos as $tipodedocumento) {
@@ -90,28 +65,115 @@ include_once '../view/partials/scripts.php';
                     </div>
                     <div>
                         <label for="numerodocumento">N° de documento</label>
-                        <input class="form-styling-two" type="text" name="nombre" placeholder="" />
+                        <input class="form-styling-two" type="text" name="numerodocumento" placeholder="" />
                     </div>
                 </div>
                 <div class="juntardos">
                     <div>
                         <label for="telefono">Telefono</label>
-                        <input class="form-styling-two" type="text" name="telefono" placeholder="" />
+                        <input class="form-styling-two" type="text" name="telefono" id="telefono" placeholder="" />
                     </div>
                     <div>
                         <label for="email">Email</label>
-                        <input class="form-styling-two" type="email" name="email" placeholder="" />
+                        <input class="form-styling-two" type="email" name="email" id="email" placeholder="" />
                     </div>
                 </div>
                 <div class="juntardos">
                     <div>
                         <label for="password">Password</label>
-                        <input class="form-styling-two" type="password" name="password" placeholder="" />
+                        <input class="form-styling-two" type="password" name="password" id="password" placeholder="" />
                     </div>
                     <div>
                         <label for="confirmpassword">Confirm password</label>
                         <input class="form-styling-two" type="password" name="confirmpassword" placeholder="" />
                     </div>
+                </div>
+                <div class="m">
+                    <label for="direccion">
+                        <p><b>Direccion</b></p>
+                    </label>
+                </div>
+                <div class="juntardos">
+                    <div>
+                        <label for="tipovia">Tipo de via</label>
+                        <select name="tipovia" class="form-styling-select">
+                            <option value="">Seleccione...</option>
+                            <?php
+                            foreach ($tipo_vias as $tipo_via) {
+                                echo "<option value='" . $tipo_via['tv_id'] . "'>" . $tipo_via['tv_nombre'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="numero">numero</label>
+                        <input class="form-styling-num" type="text" name="numeroprincipal" placeholder="" />
+                    </div>
+                    <div>
+                        <label for="letra">Complemento</label>
+                        <select name="letra" class="form-styling-select">
+                            <option value="">Seleccione...</option>
+                            <option value="0">Norte</option>
+                            <option value="1">Sur</option>
+                            <option value="2">Este</option>
+                            <option value="3">Oeste</option>
+                            <option value="4">A</option>
+                            <option value="5">B</option>
+                            <option value="6">D</option>
+                            <option value="7">F</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="tipovia">Tipo de via interseccion</label>
+                        <select name="tipovia" class="form-styling-select">
+                            <option value="">Seleccione...</option>
+                            <?php
+                            foreach ($tipo_vias as $tipo_via) {
+                                echo "<option value='" . $tipo_via['tv_id'] . "'>" . $tipo_via['tv_nombre'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="numero">numero</label>
+                        <input class="form-styling-num" type="text" name="numeroprincipal" placeholder="" />
+                    </div>
+                    <div>
+                        <label for="letra">Letra</label>
+                        <select name="letra" class="form-styling-select">
+                            <option value="">Seleccione...</option>
+                            <option value="0">-</option>
+                            <option value="1">A</option>
+                            <option value="2">AS</option>
+                            <option value="3">N</option>
+                            <option value="4">A</option>
+                            <option value="5">B</option>
+                            <option value="6">D</option>
+                            <option value="7">F</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="numero">numero</label>
+                        <input class="form-styling-num" type="text" name="numeroprincipal" placeholder="" />
+                    </div>
+                </div>
+                <div class="juntardos">
+                    <div>
+                        <label for="complemento">Complemento</label>
+                        <input class="form-styling-two" type="text" name="numeroprincipal" placeholder="" />
+                    </div>
+                    <div>
+                        <label for="barrio">Barrio</label>
+                        <select name="barrio" class="form-styling-two">
+                            <option value="">Seleccione...</option>
+                            <?php
+                            foreach ($barrios as $barrio) {
+                                echo "<option value='" . $barrio['id_barrio'] . "'>" . $barrio['nombre_barrio'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
                 </div>
                 <button type="submit" class="btn-signup">Registrate</button>
             </form>
