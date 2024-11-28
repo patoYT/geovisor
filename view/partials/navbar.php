@@ -310,7 +310,7 @@
                         </div>
                         <span class="profile-username">
                             <span class="op-7">Hi,</span>
-                            <span class="fw-bold">Hizrian</span>
+                            <span class="fw-bold"><?php echo $_SESSION["Nombre"]?></span>
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -324,8 +324,8 @@
                                             class="avatar-img rounded" />
                                     </div>
                                     <div class="u-text">
-                                        <h4>Hizrian</h4>
-                                        <p class="text-muted">hello@example.com</p>
+                                        <h4><?php echo $_SESSION["Nombre"]?></h4>
+                                        <p class="text-muted"><?php echo $_SESSION["Correo"]?></p>
                                         <a
                                             href="profile.html"
                                             class="btn btn-xs btn-secondary btn-sm">View Profile</a>

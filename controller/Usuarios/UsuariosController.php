@@ -3,67 +3,45 @@ include_once '../model/Usuarios/UsuariosModel.php';
 
 class UsuariosController
 {
-
     public function getCreate()
     {
         $obj = new UsuariosModel();
-        $sql = "SELECT * FROM rol";
 
-        $roles = $obj->consult($sql);
+        $sql = "SELECT * FROM tipodedocumento";
+        $tipodedocumentos = $obj->consult($sql);
 
-        include_once '../view/Usuarios/create.php';
+        $sql = "SELECT * FROM barrios";
+        $barrios = $obj->consult($sql); 
+        
+        $sql = "SELECT * FROM tipo_via";
+        $tipo_vias = $obj->consult($sql); 
+
+        include_once 'login.php';
     }
+
     public function postCreate()
     {
         $obj = new UsuariosModel();
-        $usu_nombre = $_POST['usu_nombre'];
-        $usu_apellido = $_POST['usu_apellido'];
-        $usu_correo = $_POST['usu_correo'];
-        $usu_clave = $_POST['usu_clave'];
-        $usu_rol = $_POST['usu_rol'];
-        $validacion = true;
 
-        if (empty($usu_nombre)) {
-            $_SESSION['errores'][] = "El campo nombre no puede estar vacio";
-            $validacion = false;
+        $usu_nombre = $_POST['nombre'];
+        $usu_apellido = $_POST['apellido'];
+        $tipodedocumento = $_POST['td'];
+        $numerodocumento = $_POST['numerodocumento'];
+        $telefono = $_POST['telefono'];
+        $usu_correo = $_POST['email'];
+        $usu_clave = $_POST['password'];
+        if(isset($_POST['rol'])){
+            $rol = $_POST['rol'];
+        }else{
+            $rol = 1;
         }
-        if (empty($usu_apellido)) {
-            $_SESSION['errores'][] = "El campo apellido no puede estar vacio";
-            $validacion = false;
-        }
-        if (empty($usu_correo)) {
-            $_SESSION['errores'][] = "El campo correo no puede estar vacio";
-            $validacion = false;
-        }
-        if (empty($usu_clave)) {
-            $_SESSION['errores'][] = "El campo clave no puede estar vacio";
-            $validacion = false;
-        }
-        if (empty($usu_rol)) {
-            $_SESSION['errores'][] = "El campo rol no puede estar vacio";
-            $validacion = false;
-        }
-        if (ValidarCampoLetras($usu_nombre) == false) {
-            $_SESSION['errores'][] = "El campo nombre no puede tener numeros";
-            $validacion = false;
-        }
-        $id = $obj->autoIncrement("ID_USUARIO", "usuarios");
-        if ($validacion == true) {
-            //Convierto la contraseña en un hash utilizando la funcion password_hash
-            //Esto lo hago para que que sea alamcenado en la bd de forma segura
-            /*
-                *NOTA: Tengo que cambiar en la bd el tamaño del varchar para funcioes
-                 */
-            $clave = password_hash($usu_clave, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO `usuarios`(`APELLIDO_USUARIO`,`CLAVE_USUARIO`,`USU_ESTADO_ID`,`NOMBRE_USUARIO`,`CORREO_USUARIO`,`USU_ROL_ID`) VALUES('$usu_apellido','$clave',1,'$usu_nombre','$usu_correo', $usu_rol);";
-            $ejecutar = $obj->insert($sql);
-            if ($ejecutar) {
-                redirect(getUrl("Usuarios", "Usuarios", "getUsuarios"));
-            } else {
-                echo "No se pudo realizar el registro";
-            }
+        $clave = password_hash($usu_clave, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO usuarios (usu_td,usu_numerodocumento,usu_nombre,usu_apellido,usu_password,usu_correo,usu_telefono, usu_rol) VALUES($tipodedocumento,'$numerodocumento','$usu_nombre','$usu_apellido','$clave','$usu_correo','$telefono','$rol');";
+        $ejecutar = $obj->insert($sql);
+        if ($ejecutar) {
+            redirect("index.php");
         } else {
-            redirect(getUrl("Usuarios", "Usuarios", "getCreate"));
+            echo "No se pudo realizar el registro";
         }
     }
     public function getUsuarios()
