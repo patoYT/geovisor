@@ -2,6 +2,6 @@
 $host= "localhost";
 $user= "postgres";
 $pass= "Emmir120";
-$database = "geovisor";
+$database = "proyectogeovisor";
 $port = "5432";
 ?>

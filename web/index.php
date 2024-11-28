@@ -1,7 +1,7 @@
 <?php
 include_once '../lib/helpers.php';
 include_once '../view/partials/header.php';
-if (isset($_SESSION['auth'])) {
+//if (isset($_SESSION['auth'])) {
     echo "<body>";
     echo "<div class='wrapper'>";
     include_once '../view/partials/sidebar.php';
@@ -22,6 +22,6 @@ if (isset($_SESSION['auth'])) {
     include_once '../view/partials/scripts.php';
     echo "</body>";
     echo "</html>";
-} else {
-    redirect("login.php");
-}
+// } else {
+//     redirect("login.php");
+// }

@@ -1,4 +1,12 @@
 <!-- Sidebar -->
+
+<?php
+
+session_start();
+
+$id_usuario = $_SESSION['usu_id'];
+?>
+
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">
         <!-- Logo Header -->
@@ -40,8 +48,8 @@
                     <div class="collapse" id="dashboard">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="../demo1/index.html">
-                                    <span class="sub-item">Perfil</span>
+                                <!-- <a href="<?php echo getUrl("Usuarios","Usuarios","getUpdate",array("usu_id"=>$id_usuario)); ?>"> -->
+                                    <span class="sub-item">Mi perfil</span>
                                 </a>
                             </li>
                         </ul>
@@ -51,29 +59,29 @@
                     <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
-                    <h4 class="text-section">Aqui hay que ponerle un nombre</h4>
+                    <h4 class="text-section">Aqui hay que ponerle un nombre (Importante)</h4>
                 </li>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#base">
                         <i class="fas fa-layer-group"></i>
-                        <p>Datos</p>
+                        <p>Usuarios</p>
                         <span class="caret"></span>
-                    </a>
+                    </a>    
                     <div class="collapse" id="base">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="components/avatars.html">
-                                    <span class="sub-item">Avatars</span>
+                                <a href="<?php echo getUrl("Usuarios", "Usuarios", "getUsuarios"); ?>">
+                                    <span class="sub-item" >Lista usuarios</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="components/buttons.html">
-                                    <span class="sub-item">Buttons</span>
+                                    <span class="sub-item">Lista Reportes</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="components/gridsystem.html">
-                                    <span class="sub-item">Grid System</span>
+                                    <span class="sub-item">Lista PQRS</span>
                                 </a>
                             </li>
                             <li>

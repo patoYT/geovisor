@@ -69,7 +69,7 @@ class UsuariosController
     public function getUsuarios()
     {
         $obj = new UsuariosModel();
-        $sql = "SELECT u.*, r.rol_nombre, e.nombre FROM usuarios u, rol r, estado e WHERE u.USU_ROL_ID  = r.rol_id AND u.USU_ESTADO_ID = e.id";
+        $sql = "SELECT u.usu_id,tpd.td_nombre,u.usu_numerodocumento,u.usu_numero_via,tv2.tv_nombre AS tipo_via_nombre,u.usu_numero_interseccion,u.usu_complemento,u.usu_nombre,u.usu_correo,u.usu_estado,u.usu_telefono,tv.tv_nombre,u.usu_apellido,r.rol_nombre,b.nombre_barrio,e.nombre_estado AS estado_nombre FROM usuarios u INNER JOIN roles r ON u.usu_rol = r.rol_id INNER JOIN estado e ON u.usu_estado = e.id_estado INNER JOIN barrios b ON u.usu_barrio = b.id_barrio INNER JOIN tipo_via tv ON u.usu_tipo_via = tv.tv_id INNER JOIN tipo_via tv2 ON u.usu_tipo_via_interseccion = tv2.tv_id INNER JOIN tipodedocumento tpd ON u.usu_td = tpd.td_id";
 
         $usuarios = $obj->consult($sql);
 
@@ -80,11 +80,20 @@ class UsuariosController
     {
         $obj = new UsuariosModel();
         $usu_id = $_GET['usu_id'];
-        $sql = "SELECT * FROM usuarios WHERE ID_USUARIO = $usu_id";
+        $sql = "SELECT * FROM usuarios WHERE usu_id = $usu_id";
 
         $usuarios = $obj->consult($sql);
-        $sql = "SELECT * FROM rol";
-        $roles = $obj->consult($sql);
+        $sqlroles = "SELECT * FROM roles";
+        $roles = $obj->consult($sqlroles);
+
+        $sqltipodedocumento = "SELECT * FROM tipodedocumento";
+        $tipodedocumento = $obj->consult($sqltipodedocumento);
+
+        $sqltipos_de_via = "SELECT * FROM tipo_via";
+        $tipoDeVia = $obj->consult($sqltipos_de_via);
+
+        $sqlBarrios = "SELECT * FROM barrios";
+        $barrios = $obj->consult($sqlBarrios);
 
         include_once '../view/Usuarios/update.php';
     }
@@ -94,12 +103,22 @@ class UsuariosController
         $usu_id = $_POST['usu_id'];
         $usu_nombre = $_POST['usu_nombre'];
         $usu_apellido = $_POST['usu_apellido'];
+        $usu_td = $_POST['usu_td'];
+        $usu_numerodocumento = $_POST['usu_numerodocumento'];
         $usu_correo = $_POST['usu_correo'];
-        $usu_clave = $_POST['usu_clave'];
+        $usu_clave = $_POST['usu_password'];
+        $usu_telefono = $_POST['usu_telefono'];
+        $usu_tipo_via = $_POST['usu_tipo_via'];
+        $usu_numero_via = $_POST['usu_numero_via'];
+        $usu_tipo_via_interseccion = $_POST['usu_tipo_via_interseccion'];
+        $usu_numero_adicional = $_POST['usu_numero_adicional'];
+        $usu_barrio = $_POST['usu_barrio'];
+        $usu_complemento = $_POST['usu_complemento'];
+        
+
         $usu_rol = $_POST['usu_rol'];
 
-        $sql = "UPDATE usuarios SET NOMBRE_USUARIO = '$usu_nombre', APELLIDO_USUARIO = '$usu_apellido', CORREO_USUARIO = '$usu_correo',
-            CLAVE_USUARIO = '$usu_clave', USU_ROL_ID = $usu_rol WHERE ID_USUARIO = $usu_id";
+        $sql = "UPDATE usuarios SET usu_nombre = '$usu_nombre', usu_apellido = '$usu_apellido',usu_td = '$usu_td',usu_numerodocumento = '$usu_numerodocumento', usu_correo = '$usu_correo',usu_password = '$usu_clave',usu_telefono = '$usu_telefono',usu_tipo_via = '$usu_tipo_via',usu_numero_via = '$usu_numero_via',usu_tipo_via_interseccion = '$usu_tipo_via_interseccion',usu_numero_adicional = '$usu_numero_adicional',usu_barrio = '$usu_barrio',usu_complemento = '$usu_complemento',usu_rol = $usu_rol WHERE usu_id = $usu_id";   
 
         $ejecutar = $obj->uptade($sql);
         if ($ejecutar) {
@@ -112,8 +131,8 @@ class UsuariosController
     {
         $obj = new UsuariosModel();
         $usu_id = $_GET['usu_id'];
-        $sql = "SELECT u.*, r.rol_nombre FROM usuarios AS u INNER JOIN rol AS r ON 
-            r.rol_id = u.USU_ROL_ID WHERE u.ID_USUARIO = $usu_id";
+        $sql = "SELECT u.*, r.rol_nombre FROM usuarios AS u INNER JOIN roles AS r ON 
+            r.rol_id = u.usu_rol WHERE u.usu_id = $usu_id";
 
         $usuarios = $obj->consult($sql);
 
@@ -123,7 +142,7 @@ class UsuariosController
     {
         $obj = new UsuariosModel();
         $usu_id = $_POST['usu_id'];
-        $sql = "DELETE FROM usuarios WHERE ID_USUARIO=$usu_id";
+        $sql = "DELETE FROM usuarios WHERE usu_id = $usu_id";
         $ejecutar = $obj->delete($sql);
         if ($ejecutar) {
             redirect(getUrl("Usuarios", "Usuarios", "getUsuarios"));
@@ -136,7 +155,8 @@ class UsuariosController
     {
         $obj = new UsuariosModel();
         $buscar = $_POST['buscar'];
-        $sql = "SELECT u.*, r.rol_nombre, e.nombre FROM usuarios u, rol r, estado e WHERE u.USU_ESTADO_ID = r.rol_id AND u.USU_ESTADO_ID = e.id AND (NOMBRE_USUARIO LIKE '%$buscar%' OR u.APELLIDO_USUARIO LIKE '%$buscar%' OR u.CORREO_USUARIO LIKE '%$buscar%' OR u.CORREO_USUARIO)";
+        $sql = "SELECT u.usu_id,tpd.td_nombre,u.usu_numerodocumento,u.usu_numero_via,tv2.tv_nombre AS tipo_via_nombre,u.usu_numero_interseccion,u.usu_complemento,u.usu_nombre,u.usu_correo,u.usu_estado,u.usu_telefono,tv.tv_nombre,u.usu_apellido,r.rol_nombre,b.nombre_barrio,e.nombre_estado AS estado_nombre FROM usuarios u INNER JOIN roles r ON u.usu_rol = r.rol_id INNER JOIN estado e ON u.usu_estado = e.id_estado INNER JOIN barrios b ON u.usu_barrio = b.id_barrio INNER JOIN tipo_via tv ON u.usu_tipo_via = tv.tv_id INNER JOIN tipo_via tv2 ON u.usu_tipo_via_interseccion = tv2.tv_id INNER JOIN tipodedocumento tpd ON u.usu_td = tpd.td_id AND (usu_nombre LIKE '%$buscar%' OR u.usu_apellido LIKE '%$buscar%' OR u.CORREO_USUARIO LIKE '%$buscar%' OR u.CORREO_USUARIO)";
+
         $usuarios = $obj->consult($sql);
 
         include_once '../view/Usuarios/buscar.php';
@@ -155,12 +175,13 @@ class UsuariosController
         } else if ($usu_estado == 2) {
             $statusToModify = 1;
         }
-        $sql = "UPDATE usuarios SET USU_ESTADO_ID = $statusToModify WHERE ID_USUARIO = $usu_id";
+        $sql = "UPDATE usuarios SET usu_estado = $statusToModify WHERE usu_id = $usu_id";
 
         $ejecutar = $obj->uptade($sql);
         
         if ($ejecutar) {
-            $sql ="SELECT u.*, r.rol_nombre, e.nombre FROM usuarios u, rol r, estado e WHERE u.USU_ROL_ID = r.rol_id AND u.USU_ESTADO_ID = e.id ORDER BY u.ID_USUARIO ASC";
+            $sql = "SELECT u.usu_id,tpd.td_nombre,u.usu_numerodocumento,u.usu_numero_via,tv2.tv_nombre AS tipo_via_nombre,u.usu_numero_interseccion,u.usu_complemento,u.usu_nombre,u.usu_correo,u.usu_estado,u.usu_telefono,tv.tv_nombre,u.usu_apellido,r.rol_nombre,b.nombre_barrio,e.nombre_estado AS estado_nombre FROM usuarios u INNER JOIN roles r ON u.usu_rol = r.rol_id INNER JOIN estado e ON u.usu_estado = e.id_estado INNER JOIN barrios b ON u.usu_barrio = b.id_barrio INNER JOIN tipo_via tv ON u.usu_tipo_via = tv.tv_id INNER JOIN tipo_via tv2 ON u.usu_tipo_via_interseccion = tv2.tv_id INNER JOIN tipodedocumento tpd ON u.usu_td = tpd.td_id ORDER BY u.usu_id ASC";
+
             $usuarios = $obj->consult($sql);
             include_once '../view/Usuarios/buscar.php';
         } else {

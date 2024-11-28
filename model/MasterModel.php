@@ -9,10 +9,16 @@
             return $result;
         }
 
-        public function consult($sql){
-            $result = pg_query($this->getConnect(),$sql);
-
-            return $result;
+        public function consult($sql) {
+            $result = pg_query($this->getConnect(), $sql);
+        
+            if ($result) {
+                // Convierte el recurso en un arreglo asociativo
+                return pg_fetch_all($result) ?: []; // Si no hay resultados, devuelve un arreglo vacío
+            } else {
+                // Maneja errores de consulta
+                throw new Exception("Error en la consulta: " . pg_last_error($this->getConnect()));
+            }
         }
 
         public function uptade($sql){

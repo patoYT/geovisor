@@ -9,7 +9,7 @@
         name="viewport" />
     <link
         rel="icon"
-        href="assets/img/kaiadmin/fotoPagina.jpg"
+        href="../img/logo.png"
         type="image/x-icon" />
 
     <!-- Fonts and icons -->
