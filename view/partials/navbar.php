@@ -327,7 +327,7 @@
                                         <h4><?php echo $_SESSION["Nombre"]?></h4>
                                         <p class="text-muted"><?php echo $_SESSION["Correo"]?></p>
                                         <a
-                                            href="profile.html"
+                                            href="<?php echo getUrl("Usuarios","Usuarios","getUpdate",array("usu_id"=>$_SESSION['id'])); ?>"
                                             class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                                     </div>
                                 </div>

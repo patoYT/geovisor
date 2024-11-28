@@ -1,9 +1,5 @@
 <!-- Sidebar -->
-7
-<?php
 
-    include_once '../../lib/helpers.php';
-?>
 
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">

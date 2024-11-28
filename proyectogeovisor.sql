@@ -235,3 +235,14 @@ CREATE TABLE geovisor (
   archivo VARCHAR(255),
   fecha_carga TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE estados (
+  id_estado SERIAL PRIMARY KEY,
+  nombre_estado VARCHAR(50) NOT NULL,
+  tabla_pertenece VARCHAR(50)
+);
+
+INSERT INTO estados (nombre_estado, tabla_pertenece) 
+VALUES 
+('Habilitada', 'usuario'),
+('Inhabilitada', 'usuario');
