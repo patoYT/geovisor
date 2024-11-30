@@ -39,8 +39,10 @@ class UsuariosController
         $sql = "INSERT INTO usuarios (usu_td,usu_numerodocumento,usu_nombre,usu_apellido,usu_password,usu_correo,usu_telefono, usu_rol) VALUES($tipodedocumento,'$numerodocumento','$usu_nombre','$usu_apellido','$clave','$usu_correo','$telefono','$rol');";
         $ejecutar = $obj->insert($sql);
         if ($ejecutar) {
+            $_SESSION['errores']['registrar']['aceptado'] = "Se hizo el registro con exito";
             redirect("index.php");
         } else {
+            $_SESSION['errores']['registrar']['denegado'] = "No se pudo hacer";
             echo "No se pudo realizar el registro";
         }
     }
@@ -165,6 +167,32 @@ class UsuariosController
         } else {
             echo "No funciono esta vaina";
             
+        }
+    }
+
+    public function CambiarLosEstados()
+    {
+
+        $obj = new UsuariosModel();
+        $usu_id = $_POST['user'];
+        $est_id = $_POST['id'];
+
+        if ($est_id == 3) {
+            $sql = "UPDATE tarea SET ESTADO_TAREA = 4 WHERE ID_TAREA = $usu_id";
+        } else if ($est_id == 4) {
+            $sql = "UPDATE tarea SET ESTADO_TAREA = 3 WHERE ID_TAREA = $usu_id";
+        }
+
+        $ejecutar = $obj->uptade($sql);
+
+        if ($ejecutar) {
+            $sql = "SELECT t.*,u.*,m.*, e.nombre FROM tarea AS t INNER JOIN usuarios AS u ON u.ID_USUARIO=t.USUARIO_ID INNER JOIN materia AS m ON m.ID_MATERIA = t.MATERIA JOIN estado AS e ON t.ESTADO_TAREA = e.id";
+
+            $tareas = $obj->consult(($sql));
+
+            include_once '../view/Tareas/buscar.php';
+        } else {
+            echo "No se pudo realizar la eliminacion";
         }
     }
 }   

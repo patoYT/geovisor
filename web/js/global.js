@@ -4,7 +4,8 @@ $(function() {
     $(".form-signup").toggleClass("form-signup-left");
     $(".frame").toggleClass("frame-long");
     $(".signup-inactive").toggleClass("signup-active");
-    $(".signin-active").toggleClass("signin-inactive");
+    $(".signin-active")
+    .toggleClass("signin-inactive");
     $(".forgot").toggleClass("forgot-left");   
     $(this).removeClass("idle").addClass("active");
 	});
@@ -45,7 +46,6 @@ $(document).ready(function(){
         let id = $(this).attr('data-id');
         let url = $(this).attr('data-url');
         let materia = $(this).attr('data-materia');
-        //alert(id + " "+ user);
         $.ajax({
             url: url,
             type: 'POST',

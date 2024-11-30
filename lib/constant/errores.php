@@ -40,6 +40,16 @@ if (isset($_SESSION['errores']['registrar'])) {
             });
         </script>
 <?php
+    } elseif(isset($_SESSION['errores']['registrar']['denegado'])){
+        ?>
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "No se pudo completar el registro"
+            })
+        </script>
+        <?php
     }
 }
 unset($_SESSION['errores']);
