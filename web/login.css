@@ -5,15 +5,15 @@ body * {
 }
 
 body {
-    /* background-image: url(../img/atardecer-en-la-playa-arte-digital_3840x2160_xtrafondos.com.jpg);
+    background-image: url(../img/atardecer-en-la-playa-arte-digital_3840x2160_xtrafondos.com.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
     margin: 0;
-    color: white; */
+    color: white;
     
-    background: linear-gradient(190deg,#8939ab,#007acc);
+    /* background: linear-gradient(190deg,#8939ab,#007acc); */
 }
 
 .container {
