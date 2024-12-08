@@ -43,3 +43,4 @@ class AccesoController
         redirect("index.php");
     }
 }
+?>

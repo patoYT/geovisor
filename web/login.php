@@ -35,7 +35,7 @@
                     <button type="submit" class="btn-signin">Iniciar sesion</button>
                 </div>
                 <div class="forgot">
-                    <a href="#">Olvidates tu contraseña?</a>
+                    <a href="restablecer_contra.php">Olvidates tu contraseña?</a>
                 </div>
             </form>
 
