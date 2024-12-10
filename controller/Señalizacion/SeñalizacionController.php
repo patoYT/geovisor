@@ -7,14 +7,17 @@ class SeñalizacionController
     {
         $obj = new SeñalizacionModel();
 
-        $sql = "SELECT * FROM clase_vehiculos";
-        $clase_vehiculos = $obj->consult($sql);
+        $sqlCategoria = "SELECT * FROM categoria_señalizacion";
+        $categorias = $obj->consult($sqlCategoria);
 
-        $sql = "SELECT * FROM subtipo_choque";
-        $subtipo_choques = $obj->consult($sql); 
+        $sqlTipo = "SELECT * FROM tipo_señalizacion";
+        $tipos = $obj->consult($sqlTipo); 
         
-        $sql = "SELECT * FROM tipo_choque";
-        $tipo_choques = $obj->consult($sql); 
+        $sqlTipo_señal = "SELECT * FROM tipo_señal";
+        $tipo_señal = $obj->consult($sqlTipo_señal); 
+
+        $sqlTipo_daño = "SELECT * FROM tipo_daño WHERE tabla_pertenece = 'señalizaciones viales'";
+        $tipos_de_daño = $obj->consult($sqlTipo_daño);
 
         include_once '../view/Señalizacion/Create.php';
     }

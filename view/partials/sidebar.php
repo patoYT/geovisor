@@ -1,6 +1,4 @@
 <!-- Sidebar -->
-
-
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">
         <!-- Logo Header -->
@@ -64,16 +62,14 @@
                     </a>    
                     <div class="collapse" id="base">
                         <ul class="nav nav-collapse">
-                            <li>
-                                <a href="<?php echo getUrl("Usuarios", "Usuarios", "getUsuarios"); ?>">
-                                    <span class="sub-item" >Lista usuarios</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/buttons.html">
-                                    <span class="sub-item">Lista Reportes</span>
-                                </a>
-                            </li>
+                                <li>
+                                    <a href="<?php echo getUrl("Usuarios", "Usuarios", "getUsuarios"); ?>">
+                                        <span class="sub-item" >Lista usuarios</span>
+                                    </a>
+                                </li>
+                                
+                            
+
                         </ul>
                     </div>
                 </li>
@@ -85,24 +81,14 @@
                     </a>
                     <div class="collapse" id="sidebarLayouts">
                         <ul class="nav nav-collapse">
+                        <li>
+                                <a href="<?php echo getUrl("Solicitudes", "Solicitudes", "getSolicitudes"); ?>">
+                                    <span class="sub-item">Registrar Solicitud</span>
+                                </a>
+                            </li>
                             <li>
                                 <a href="<?php echo getUrl("Accidentes", "Accidentes", "getCreate"); ?>">
-                                    <span class="sub-item">Accidentes</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo getUrl("Reductores", "Reductores", "getCreate"); ?>">
-                                    <span class="sub-item">Reductores de velocidad</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo getUrl("Señalizacion", "Señalizacion", "getCreate"); ?>">
-                                    <span class="sub-item">Señalización vial</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo getUrl("Vial", "Vial", "getCreate"); ?>">
-                                    <span class="sub-item">Malla vial</span>
+                                    <span class="sub-item">Consultar Solicitudes</span>
                                 </a>
                             </li>
                         </ul>

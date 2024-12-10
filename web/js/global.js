@@ -12,6 +12,55 @@ $(function() {
 
 $(document).ready(function(){
 
+    //console.log("Si se esta cargando el js");
+    //Este es el que va a cambiar el formulario dependiendo de lo que seleccione
+    $(document).on('change',"#tipoSolicitud",function(){
+        //Aqui se obtiene el valor seleccionado
+    console.log("Si se esta cargando el evento de Change");
+
+    let seleccion = $(this).val();
+
+    // Obtiene el atributo data-url de la opción seleccionada
+    let url = $(this).find(':selected').data('url');
+
+    $('#formulario-dinamico').html('');
+
+    console.log("URL seleccionada: ", url);
+
+        if (url){ //Aqui es para verifica que la url no este vacio 
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {valor: seleccion },
+                success: function (data) {
+
+                    // console.log("Respuesta del servidor: ", data);
+
+                    $('#formulario-dinamico').html(data);
+                },
+                error: function (){
+                    $('#formulario-dinamico').html('<p>Error al cargar el formulario.</p>');
+                }
+            });
+        } else {
+            //Este es para que limpie el formulario si no hay nada seleccionado
+            $('#formulario-dinamico').html("<p class='text-center'>Por favor Seleccione una Opcion...</p>"); 
+
+        }
+    });
+
+
+    $(document).on('change', "#EstadoSeñalizacion", function(){
+
+    let seleccion = $(this).val();
+        if (seleccion === 'reparacion'){
+            $('#grupoTipoDano').show();
+        } else {
+            $('#grupoTipoDano').hide();
+
+        }
+    })
+    
     $(document).on('keyup',"#buscar",function(){
 
         let buscar =  $(this).val();

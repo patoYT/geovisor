@@ -13,34 +13,19 @@ proceso, Rechazada, Completada). -->
 
 <div class="container">
 
-
 	<div class="form-group">
-		<label for="squareSelect">¿Dirección de la vía pública?</label>
-		<div class="form-group">
-			<div class="input-group">
-				<button class="btn btn-black btn-border" type="button">Ubicacion</button>
-				<input
-					type="text"
-					class="form-control"
-					placeholder=""
-					aria-label=""
-					aria-describedby="basic-addon1" />
-			</div>
-		</div>
+		<label for="pillSelect">Tipo de PQRS</label>
+		<select class="form-control input-pill" id="EstadoSeñalizacion">
+			<option value="">Seleccione...</option>
+			<option value="peticion">Peticiones</option>
+			<option value="queja">Quejas</option>
+			<option value="reclamo">Reclamos</option>
+			<option value="sugerencia">Sugerencias</option>   
+		</select>
+	</div>
 
-		<div class="form-group">
-			<label for="pillSelect">Tipo de daño</label>
-			<select class="form-control input-pill" id="pillSelect">
-				<option value="">Seleccione...</option>
-				<?php
-				foreach ($tipos_de_daño as $tipo_daño) {
-					echo "<option value='" . $tipo_daño['id_tipo'] . "'>" . $tipo_daño['nombre_tipo'] . "</option>";
-				}
-				?>
-			</select>
-		</div>
 		<div>
-			<label for="pillSelect">Añade imagenes</label>
+			<label for="pillSelect">Añade imagenes (Obcional) </label>
 			<input class="form-control btn-round" type="file" id="formFileMultiple" multiple>
 		</div>
 
@@ -50,8 +35,9 @@ proceso, Rechazada, Completada). -->
 				<textarea class="form-control" aria-label="With textarea"></textarea>
 			</div>
 		</div>
+
 		<div class="mt-5">
 			<input type="submit" value="enviar" class="btn btn-success btn-round">
 		</div>
 	</div>
-</div>
+</div> 

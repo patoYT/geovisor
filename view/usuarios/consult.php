@@ -14,8 +14,7 @@
     </div>
     <div class="row">
         <div class="col-md-3 mt-4">
-            <input type="text" name="buscar" id="buscar" class="form-control" placeholder="Buscar por Nombre o Correo" data-url='<?php
-            echo getUrl("Usuarios", "Usuarios", "buscar", false, "ajax") ?>' >
+            <input type="text" name="buscar" id="buscar" class="form-control" placeholder="Buscar por Nombre o Correo" data-url='<?php echo getUrl("Usuarios", "Usuarios", "buscar", false, "ajax") ?>' >
         </div>
         <div class="table-responsive mt-3">
         <table class="table table-primary table-hover">

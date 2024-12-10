@@ -7,14 +7,8 @@ class VialController
     {
         $obj = new VialModel();
 
-        $sql = "SELECT * FROM clase_vehiculos";
-        $clase_vehiculos = $obj->consult($sql);
-
-        $sql = "SELECT * FROM subtipo_choque";
-        $subtipo_choques = $obj->consult($sql); 
-        
-        $sql = "SELECT * FROM tipo_choque";
-        $tipo_choques = $obj->consult($sql); 
+        $sqlTipo_daño = "SELECT * FROM tipo_daño WHERE tabla_pertenece = 'vía pública'";
+        $tipos_de_daño = $obj->consult($sqlTipo_daño);
 
         include_once '../view/Vial/Create.php';
     }

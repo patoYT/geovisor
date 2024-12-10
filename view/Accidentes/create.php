@@ -21,10 +21,6 @@ accidente reportado). -->
 <div class="container">
 
 	<div class="form-group">
-		<label for="squareSelect">Fecha del accidente: <?php echo date("d-m-Y") ?></label>
-	</div>
-
-	<div class="form-group">
 		<label for="squareSelect">¿Donde fue el accidente?</label>
 		<div class="form-group">
 			<div class="input-group">
@@ -73,7 +69,7 @@ accidente reportado). -->
 		</div>
 		<div>
 			<label for="pillSelect">Añade imagenes</label>
-			<input class="form-control" type="file" id="formFileMultiple" multiple>
+			<input class="form-control btn-round" type="file" id="formFileMultiple" multiple>
 		</div>
 
 		<div class="form-group">
@@ -84,17 +80,19 @@ accidente reportado). -->
 				<option>NO</option>
 			</select>
 		</div>
-		<!-- <div class="form-check">
+		<div class="form-check">
 			<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
 			<label class="form-check-label" for="flexCheckChecked">
 				¿Hubo lesionados?
 			</label>
-		</div> -->
 		<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-text">Observaciónes</span>
 				<textarea class="form-control" aria-label="With textarea"></textarea>
 			</div>
+		</div>
+		<div class="mt-5">
+			<input type="submit" value="Enviar" class="btn btn-success btn-round">
 		</div>
 	</div>
 </div>

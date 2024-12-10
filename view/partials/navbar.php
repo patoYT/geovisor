@@ -309,7 +309,7 @@
                                 class="avatar-img rounded-circle" />
                         </div>
                         <span class="profile-username">
-                            <span class="op-7">Hi,</span>
+                            <span class="op-7">HOLA,</span>
                             <span class="fw-bold"><?php echo $_SESSION["Nombre"]?></span>
                         </span>
                     </a>
@@ -328,7 +328,7 @@
                                         <p class="text-muted"><?php echo $_SESSION["Correo"]?></p>
                                         <a
                                             href="<?php echo getUrl("Usuarios","Usuarios","getUpdate",array("usu_id"=>$_SESSION['id'])); ?>"
-                                            class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                            class="btn btn-xs btn-secondary btn-sm">Ver perfil</a>
                                     </div>
                                 </div>
                             </li>

@@ -23,5 +23,8 @@
             Distributed by
             <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
         </div>
+        <script src="js/jquery.js"></script> 
+        <script src="js/global.js"></script> 
     </div>
+
 </footer>
