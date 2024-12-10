@@ -4,7 +4,8 @@ $(function() {
     $(".form-signup").toggleClass("form-signup-left");
     $(".frame").toggleClass("frame-long");
     $(".signup-inactive").toggleClass("signup-active");
-    $(".signin-active").toggleClass("signin-inactive");
+    $(".signin-active")
+    .toggleClass("signin-inactive");
     $(".forgot").toggleClass("forgot-left");   
     $(this).removeClass("idle").addClass("active");
 	});
@@ -94,7 +95,6 @@ $(document).ready(function(){
         let id = $(this).attr('data-id');
         let url = $(this).attr('data-url');
         let materia = $(this).attr('data-materia');
-        //alert(id + " "+ user);
         $.ajax({
             url: url,
             type: 'POST',
@@ -126,78 +126,282 @@ $(document).ready(function(){
 
         $(this).parent().parent().parent().remove();
     })
-    // $('#form-signup').submit(function(event){
-    //     event.preventDefault();
-        
-    //     let mensajes = [];
-    //     let esValido = true;
-    
-    //     const nombre =  $('#nombre').val().trim();
-    
-    //     if(nombre === ''){
-    //         mensajes.push('El campo nombre es obligatorio.');
-    //         esValido = false;
-    //     } else {
-    //         if(ValidarCampoLetras(nombre)){
-    //             mensajes.push('El campo nombre solo puede tener letras.');
-    //             esValido = false;
-    //         }
-    //     }
-    
-    //     const apellido =  $('#apellido').val().trim();
-    //     if(apellido === ''){
-    //         mensajes.push('el campo apellido es obligatorio.');
-    //         esValido = false;
-    //     }else{
-    //         if(ValidarCampoLetras(apellido)){
-    //             mensajes.push('El campo apellido solo puede tener letras.');
-    //             esValido = false;
-    //         }
-    //     }
-        
-    //     const  email =  $('#email').val().trim();
-    //     const patron = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    
-    //     if(email === ''){
-    //         mensajes.push('El campo correo es obligatorio.');
-    //         esValido = false;
-    //     } else {
-    //         if(!patron.test(email)){
-    //             mensajes.push('El correo no es valido.');
-    //             esValido = false;
-    //         }
-    //     }
-    
-    //     const contraseña =  $('#password').val().trim();
-    //     const patronContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    
-    //     if(contraseña === ''){
-    //         mensajes.push('El campo contraseña es obligatorio.');
-    //         esValido = false;
-    //     } else {
-    //         if(!patronContrasena.test(contraseña)){
-    //             mensajes.push('La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un caracter especial.');
-    //             esValido = false;
-    //         }
-    //     }
-    //     // const rol =  $('#rol').val().trim();
-    //     // if(rol === 'Seleccione...'){
-    //     //     mensajes.push('El campo rol es obligatorio.');
-    //     //     esValido = false;
-    //     // }
-    //     if(esValido){
-    //         //  $("#error").fadeOut(500);
-    //         //  $("#error").addClass('d-none');
-    //         this.submit();
 
-    //     }else{
-    //         alert("Error mi pana");
-    //         mensajes.forEach( mensajito => {
-    //             alert(mensajito);
-    //         }); 
-    //     //     $('#error').html(mensajes.map(msg => `${msg}<br>`).join(''));
-    //     //     $('#error').removeClass('d-none');
-    //     // 
-    //     }
-    // });
+    $(document).ready(function() {
+        $('#form-signup').submit(function(event) {
+            event.preventDefault();
+            
+            let errores = [];
+            let esValido = true;
+    
+            // Validación del nombre
+            const nombre = $('#nombre').val().trim();
+            if (nombre === '') {
+                errores.push('El campo nombre es obligatorio.');
+                esValido = false;
+            } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nombre)) {
+                errores.push('El campo nombre solo puede contener letras.');
+                esValido = false;
+            }
+    
+            // Validación del apellido
+            const apellido = $('#apellido').val().trim();
+            if (apellido === '') {
+                errores.push('El campo apellido es obligatorio.');
+                esValido = false;
+            } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellido)) {
+                errores.push('El campo apellido solo puede contener letras.');
+                esValido = false;
+            }
+    
+            // Validación del tipo de documento
+            const tipoDocumento = $('#td').val();
+            if (tipoDocumento === '') {
+                errores.push('Debe seleccionar un tipo de documento.');
+                esValido = false;
+            }
+    
+            // Validación del número de documento
+            const numeroDocumento = $('input[name="numerodocumento"]').val().trim();
+            if (numeroDocumento === '') {
+                errores.push('El número de documento es obligatorio.');
+                esValido = false;
+            } else if (!/^\d+$/.test(numeroDocumento)) {
+                errores.push('El número de documento solo debe contener dígitos.');
+                esValido = false;
+            }
+    
+            // Validación del teléfono
+            const telefono = $('#telefono').val().trim();
+            if (telefono === '') {
+                errores.push('El campo teléfono es obligatorio.');
+                esValido = false;
+            } else if (!/^\d{10}$/.test(telefono)) {
+                errores.push('El teléfono debe contener 10 dígitos.');
+                esValido = false;
+            }
+    
+            // Validación del email
+            const email = $('#email').val().trim();
+            if (email === '') {
+                errores.push('El campo correo es obligatorio.');
+                esValido = false;
+            } else if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
+                errores.push('El correo electrónico no es válido.');
+                esValido = false;
+            }
+    
+            // Validación de la contraseña
+            const password = $('#password').val();
+            if (password === '') {
+                errores.push('El campo contraseña es obligatorio.');
+                esValido = false;
+            } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)) {
+                errores.push('La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.');
+                esValido = false;
+            }
+    
+            // Validación de confirmación de contraseña
+            const confirmPassword = $('input[name="confirmpassword"]').val();
+            if (confirmPassword === '') {
+                errores.push('Debe confirmar la contraseña.');
+                esValido = false;
+            } else if (confirmPassword !== password) {
+                errores.push('Las contraseñas no coinciden.');
+                esValido = false;
+            }
+    
+            // Validación de los campos de dirección
+            const tipovia = $('select[name="tipovia"]').val();
+            const numeroPrincipal = $('input[name="numeroprincipal"]').val().trim();
+            const barrio = $('select[name="barrio"]').val();
+    
+            if (tipovia === '') {
+                errores.push('Debe seleccionar un tipo de vía.');
+                esValido = false;
+            }
+            if (numeroPrincipal === '') {
+                errores.push('El número de la vía principal es obligatorio.');
+                esValido = false;
+            }
+            if (barrio === '') {
+                errores.push('Debe seleccionar un barrio.');
+                esValido = false;
+            }
+    
+            if (esValido) {
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if (response === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Registro exitoso',
+                                text: 'Tu cuenta ha sido creada correctamente.'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error en el registro',
+                                text: 'No se pudo completar el registro. Por favor, inténtalo de nuevo.'
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Hubo un problema al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.'
+                        });
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error de validación',
+                    html: errores.join('<br>')
+                });
+            }
+        });
+    });
+    
+    $('#emailForm').on('submit', function(e) {
+        let userEmail = '';
+        e.preventDefault();
+        userEmail = $('#email').val();
+
+        $.ajax({
+            url: 'cambiarContraseña.php',
+            type: 'POST',
+            data: {
+                action: 'request_reset',
+                email: userEmail
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Código Enviado',
+                        text: response.message
+                    });
+                    $('#resetPasswordForm').hide();
+                    $('#verifyCodeForm').show();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.message
+                    });
+                }
+            },
+            error: function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un problema al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.'
+                });
+            }
+        });
+    });
+
+    $('#codeForm').on('submit', function(e) {
+        e.preventDefault();
+        let code = $('#code').val();
+
+        $.ajax({
+            url: 'cambiarContraseña.php',
+            type: 'POST',
+            data: {
+                action: 'verify_code',
+                email: userEmail,
+                code: code
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Código Verificado',
+                        text: response.message
+                    });
+                    $('#verifyCodeForm').hide();
+                    $('#newPasswordForm').show();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.message
+                    });
+                }
+            },
+            error: function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un problema al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.'
+                });
+            }
+        });
+    });
+
+    $('#passwordForm').on('submit', function(e) {
+        e.preventDefault();
+        let password = $('#password').val();
+        let confirmPassword = $('#confirmPassword').val();
+
+        if (password !== confirmPassword) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Las contraseñas no coinciden.'
+            });
+            return;
+        }
+
+        $.ajax({
+            url: 'cambiarContraseña.php',
+            type: 'POST',
+            data: {
+                action: 'reset_password',
+                email: userEmail,
+                code: $('#code').val(),
+                password: password
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Contraseña Actualizada',
+                        text: response.message
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'login.php'; // Redirige al login
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.message
+                    });
+                }
+            },
+            error: function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un problema al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.'
+                });
+            }
+        });
+    });
+
 });

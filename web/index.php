@@ -24,8 +24,9 @@ if (isset($_SESSION['auth'])) {
     echo "</body>";
     echo "</html>";
 } else {
-    include '../controller/Usuarios/UsuariosController.php';
+    include_once '../controller/Usuarios/UsuariosController.php';
     $loginController = new UsuariosController();
     $loginController->getCreate();
+    include_once '../lib/constant/errores.php';
 }
 ?>

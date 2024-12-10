@@ -11,7 +11,9 @@
     <script src="js/global.js"></script>
 
 </head>
-
+<?php
+    include_once '../controller/Usuarios/UsuariosController.php';
+?>
 <div class="container">
     <div class="frame">
         <div class="nav">
@@ -33,7 +35,7 @@
                     <button type="submit" class="btn-signin">Iniciar sesion</button>
                 </div>
                 <div class="forgot">
-                    <a href="#">Olvidates tu contraseña?</a>
+                    <a href="restablecer_contra.php">Olvidates tu contraseña?</a>
                 </div>
             </form>
             <!-- esta es la parte de registrar -->
@@ -178,4 +180,4 @@
     </div>
     </body>
 
-</html>
+</html>|
