@@ -7,7 +7,7 @@
     <link href="login.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/jquery.js"></script>
-    
+    <script src="js/restablecercontrasena.js"></script>
 </head>
 <body>
     <div class="container">
@@ -18,10 +18,11 @@
                 </ul>
             </div>
 
-            <div id="resetPasswordForm" class="form-signin">
-                <form id="emailForm">
+            <!-- Formulario para enviar el correo -->
+            <div id="resetPasswordForm" class="form-signin" style="display: block;">
+                <form id="emailForm" method="POST" action="<?php echo getUrl('restablecer_contra', 'restablecer_contra', 'EnviarToken'); ?>">
                     <div class="divsesion">
-                        <img src="../img/verify-code.png" alt="Restablecer contraseña" class="iniciarsesion">
+                        <img src="../img/email-email-marketing.gif" alt="Restablecer contraseña" class="iniciarsesion">
                     </div>
                     <label for="email">Correo Electrónico</label>
                     <input type="email" id="email" name="email" class="form-styling" required placeholder="Ingresa tu correo electrónico">
@@ -31,8 +32,9 @@
                 </form>
             </div>
 
+            <!-- Formulario para verificar el código -->
             <div id="verifyCodeForm" class="form-signin" style="display:none;">
-                <form id="codeForm">
+                <form id="codeForm" method="POST" action="<?php echo getUrl('restablecer_contra', 'restablecer_contra', 'verificarToken'); ?>">
                     <div class="divsesion">
                         <img src="../img/verify-code.png" alt="Verificar código" class="iniciarsesion">
                     </div>
@@ -44,8 +46,9 @@
                 </form>
             </div>
 
+            <!-- Formulario para cambiar la contraseña -->
             <div id="newPasswordForm" class="form-signin" style="display:none;">
-                <form id="passwordForm">
+                <form id="passwordForm" method="POST" action="<?php echo getUrl('restablecer_contra', 'restablecer_contra', 'restablecer_contrasena'); ?>">
                     <div class="divsesion">
                         <img src="../img/reset-password.png" alt="Nueva contraseña" class="iniciarsesion">
                     </div>
@@ -58,12 +61,11 @@
                     </div>
                 </form>
             </div>
+
             <div class="forgot">
                 <a href="login.php" id="btnVolver" class="btn-volver">Volver al inicio de sesión</a>
             </div>
         </div>
     </div>
-
-    <script src="../../web/js/restablecercontraseña.js"></script>
 </body>
 </html>

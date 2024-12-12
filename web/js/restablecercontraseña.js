@@ -1,92 +1,88 @@
-$(document).ready(function() {
-    $('#emailForm').on('submit', function(e) {
+$(document).ready(function () {
+    // Manejar el envío del formulario de correo electrónico
+    $(document).on('submit', '#resetPasswordForm', function (e) {
         e.preventDefault();
-        let email = $('#email').val();
+        var email = $('#email').val().trim();
+        var url = $(this).attr('action');
 
-        $.ajax({
-            url: 'restablecer_contra.php',
-            type: 'POST',
-            data: {
-                action: 'request_reset',
-                email: email
-            },
-            dataType: 'json',
-            success: function(response) {
-                if (response.success) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Enlace Enviado',
-                        text: response.message
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: response.message
-                    });
-                }
-            },
-            error: function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Hubo un problema al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.'
-                });
-            }
-        });
-    });
-
-    $('#passwordForm').on('submit', function(e) {
-        e.preventDefault();
-        let password = $('#password').val();
-        let confirmPassword = $('#confirmPassword').val();
-        let token = new URLSearchParams(window.location.search).get('token');
-
-        if (password !== confirmPassword) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Las contraseñas no coinciden.'
-            });
+        if (email === '' || !validateEmail(email)) {
+            Swal.fire('Error', 'Por favor, ingrese un correo electrónico válido.', 'error');
             return;
         }
 
         $.ajax({
-            url: 'restablecer_contra.php',
+            url: url,
             type: 'POST',
-            data: {
-                action: 'reset_password',
-                token: token,
-                password: password
-            },
-            dataType: 'json',
-            success: function(response) {
-                if (response.success) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Contraseña Actualizada',
-                        text: response.message
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = 'login.php';
-                        }
-                    });
+            data: { email: email },
+            success: function (data) {
+                if (data.success) {
+                    $('#resetPasswordForm').hide();
+                    $('#verifyCodeForm').show();
+                    Swal.fire('Éxito', data.message, 'success');
                 } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: response.message
-                    });
+                    Swal.fire('Error', data.message, 'error');
                 }
-            },
-            error: function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Hubo un problema al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.'
-                });
             }
         });
     });
-});
 
+    // Manejar el envío del formulario de verificación de código
+    $(document).on('submit', '#verifyCodeForm', function (e) {
+        e.preventDefault();
+        var code = $('#code').val().trim();
+        var url = $(this).attr('action');
+
+        if (code === '') {
+            Swal.fire('Error', 'El campo de código es obligatorio.', 'error');
+            return;
+        }
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: { code: code },
+            success: function (data) {
+                if (data.success) {
+                    $('#verifyCodeForm').hide();
+                    $('#newPasswordForm').show();
+                    Swal.fire('Éxito', data.message, 'success');
+                } else {
+                    Swal.fire('Error', data.message, 'error');
+                }
+            }
+        });
+    });
+
+    // Manejar el envío del formulario de nueva contraseña
+    $(document).on('submit', '#passwordForm', function (e) {
+        e.preventDefault();
+        var password = $('#password').val().trim();
+        var confirmPassword = $('#confirmPassword').val().trim();
+        var url = $(this).attr('action');
+
+        if (password === '' || password.length < 8 || password !== confirmPassword) {
+            Swal.fire('Error', 'Por favor, verifique su contraseña.', 'error');
+            return;
+        }
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: { password: password, confirmPassword: confirmPassword },
+            success: function (data) {
+                if (data.success) {
+                    Swal.fire('Éxito', data.message, 'success').then(() => {
+                        window.location.href = 'login.php';
+                    });
+                } else {
+                    Swal.fire('Error', data.message, 'error');
+                }
+            }
+        });
+    });
+
+    function validateEmail(email) {
+        var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+});
