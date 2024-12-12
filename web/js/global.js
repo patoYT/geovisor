@@ -181,37 +181,7 @@ $(document).ready(function(){
             }
     
             if (esValido) {
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: 'POST',
-                    data: $(this).serialize(),
-                    success: function(response) {
-                        if (response === 'success') {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Registro exitoso',
-                                text: 'Tu cuenta ha sido creada correctamente.'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    window.location.reload();
-                                }
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error en el registro',
-                                text: 'No se pudo completar el registro. Por favor, inténtalo de nuevo.'
-                            });
-                        }
-                    },
-                    error: function() {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Hubo un problema al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.'
-                        });
-                    }
-                });
+                this.submit();
             } else {
                 Swal.fire({
                     icon: 'error',
