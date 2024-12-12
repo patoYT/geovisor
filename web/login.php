@@ -38,7 +38,7 @@
                     <a href="restablecer_contra.php">Olvidates tu contraseña?</a>
                 </div>
             </form>
-
+            <!-- esta es la parte de registrar -->
             <form class="form-signup" action="<?php echo getUrl("Usuarios", "Usuarios", "postCreate", false, "ajax"); ?>" method="post" name="form-signup" id="form-signup">
                 <div class="juntardos">
                     <div>

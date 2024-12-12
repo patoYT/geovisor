@@ -1,6 +1,7 @@
 <?php
     include_once '../lib/helpers.php';
 if (isset($_SESSION['auth'])) {
+    
     include_once '../view/partials/header.php';
     echo "<body>";
     echo "<div class='wrapper'>";

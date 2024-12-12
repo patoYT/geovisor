@@ -13,6 +13,8 @@ proceso, Rechazada, Completada). -->
 
 <div class="container">
 
+	<h1>Holaaa el id del usuario es <?php echo $_SESSION["id"] ?></h1>
+
 	<div class="form-group">
 		<label for="pillSelect">Tipo de solicitud</label>
 		<select class="form-control input-pill" id="EstadoSeñalizacion">
@@ -34,27 +36,37 @@ proceso, Rechazada, Completada). -->
 			</select>
 		</div>
 
+
 	<div class="form-group">
-		<label for="pillSelect">Categoria de señalizacion</label>
-		<select class="form-control input-pill" id="pillSelect">
+		<label for="pillSelect">Categoria de reductor</label>
+		<select class="form-control input-pill" id="cate_reductor">
 			<option value="">Seleccione...</option>
 			<?php
-			foreach ($categorias as $categoria) {
-				echo "<option value='" . $categoria['id_categoria'] . "'>" . $categoria['nombre_categoria'] . "</option>";
+			foreach ($categoria_reductores as $categoria_reductor) {
+				echo "<option value='" . $categoria_reductor['id_cr'] . "'>" . $categoria_reductor['nombre_reductor'] . "</option>";
 			}
 			?>
 		</select>
 	</div>
 
+	<div class="form-group">
+		<label for="pillSelect">Tipo de solicitud</label>
+		<select class="form-control input-pill" id="tipo_solicitud">
+			<option value="">Seleccione...</option>
+			<option value="">Nuevo</option>
+			<option value="">Reparacion</option>
+		</select>
+	</div>
 
 
 	<div class="form-group">
-		<label for="pillSelect">Tipo de señal</label>
-		<select class="form-control input-pill" id="pillSelect">
+		<label for="pillSelect">Tipo reductor</label>
+		<select class="form-control input-pill" id="tipo_reductor">
 			<option value="">Seleccione...</option>
 			<?php
-			foreach ($tipos as $tipo) {
-				echo "<option value='" . $tipo['id_tipo'] . "'>" . $tipo['nombre_tipo'] . "</option>";
+			foreach ($tipo_reductores as $tipo_reductor) {
+				echo "<option value='" . $tipo_reductor['id_tr
+'] . "'>" . $tipo_reductor['nombre_tipo'] . "</option>";
 			}
 			?>
 		</select>
@@ -90,7 +102,7 @@ proceso, Rechazada, Completada). -->
 		<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-text">Observaciónes</span>
-				<textarea class="form-control" aria-label="With textarea"></textarea>
+				<textarea class="form-control" aria-label="With textarea" id="observaciones"></textarea>
 			</div>
 		</div>
 

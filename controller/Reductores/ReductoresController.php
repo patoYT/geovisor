@@ -7,16 +7,39 @@ class ReductoresController
     {
         $obj = new ReductoresModel();
 
-        $sql = "SELECT * FROM clase_vehiculos";
-        $clase_vehiculos = $obj->consult($sql);
+        $sqlestado = "SELECT * FROM estado";
+        $estados = $obj->consult($sqlestado);
 
-        $sql = "SELECT * FROM subtipo_choque";
-        $subtipo_choques = $obj->consult($sql); 
+        $sqltipo_reductor = "SELECT * FROM tipo_reductor";
+        $tipo_reductores = $obj->consult($sqltipo_reductor); 
         
-        $sql = "SELECT * FROM tipo_choque";
-        $tipo_choques = $obj->consult($sql); 
+        $sqltipo_señal = "SELECT * FROM tipo_señal";
+        $tipo_señales = $obj->consult($sqltipo_señal); 
 
-        include_once '../view/Reductores/Create.php';
+        $sqlCategoria_reductor = "SELECT * FROM categoria_reductor";
+        $categoria_reductores = $obj->consult($sqlCategoria_reductor); 
+
+        $sqlTipo_daño = "SELECT * FROM tipo_daño WHERE tabla_pertenece = 'señalizaciones viales'";
+        $tipos_de_daño = $obj->consult($sqlTipo_daño);
+        
+        include_once '../view/Reductores/CreateR.php';
+    }
+
+    public function postCreate(){
+
+        $obj = new ReductoresModel();
+
+        $tipo_solicitud = $_POST['EstadoSeñalizacion'];
+        $tipo_daño = $_POST['TipoDaño'];
+        $categoria_reductor = $_POST['cate_reductor'];
+        $tipo_solici = $_POST['tipo_solicitud'];
+        $tipo_reduct = $_POST['tipo_reductor'];
+        $direccion = "cr cualquier Vaina";
+        $usu_id = $_SESSION["id"];
+        $observaciones = $_POST['observaciones'];
+
+
+        $sql = "INSERT INTO solicitudes (id_tipo_solicitud,id_usuario,coordenadas,observaciones) VALUES ($tipo_solicitud,$usu_id,'$direccion','$observaciones')";
     }
     
 }
