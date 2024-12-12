@@ -87,7 +87,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="<?php echo getUrl("Accidentes", "Accidentes", "getCreate"); ?>">
+                                <a href="<?php echo getUrl("Solicitudes", "Solicitudes", "mostrarSolicitudes"); ?>">
                                     <span class="sub-item">Consultar Solicitudes</span>
                                 </a>
                             </li>
