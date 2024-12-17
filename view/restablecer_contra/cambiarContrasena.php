@@ -20,7 +20,7 @@
 
             <!-- Formulario para enviar el correo -->
             <div id="resetPasswordForm" class="form-signin" style="display: block;">
-                <form id="emailForm" method="POST" action="<?php echo getUrl('restablecer_contra', 'restablecer_contra', 'EnviarToken'); ?>">
+                <form id="emailForm" method="POST" action="<?php echo getUrl('restablecer_contra', 'restablecer_contra', 'EnviarToken', false, 'ajax'); ?>">
                     <div class="divsesion">
                         <img src="../img/email-email-marketing.gif" alt="Restablecer contraseña" class="iniciarsesion">
                     </div>

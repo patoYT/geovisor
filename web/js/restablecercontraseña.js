@@ -19,6 +19,7 @@ $(document).ready(function () {
                     $('#resetPasswordForm').hide();
                     $('#verifyCodeForm').show();
                     Swal.fire('Éxito', data.message, 'success');
+                    window.location.href = 'restablecer_contra.php';
                 } else {
                     Swal.fire('Error', data.message, 'error');
                 }

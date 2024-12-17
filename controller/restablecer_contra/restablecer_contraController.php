@@ -6,6 +6,7 @@ include_once '../model/restablecer_contra/restablecer_contraModel.php';
 include_once '../lib/constant/errores.php';
 include_once 'assets/PHPMailer/PHPMailer.php';
 include_once 'assets/PHPMailer/Exception.php';
+include_once 'assets/PHPMailer/SMTP.php';
 
 class restablecer_contraController
 {
@@ -37,7 +38,7 @@ class restablecer_contraController
             $mail->addAddress($email);
 
             $mail->isHTML(true);
-            $mail->Subject = 'Restablecimiento de contraseña';
+            $mail->Subject = 'Codigo de verificacion';
             $mail->Body    = "Tu código de restablecimiento es: <b>$token</b>";
 
             $mail->send();
@@ -72,6 +73,7 @@ class restablecer_contraController
         } else {
             return ['success' => false, 'message' => 'No se encontró ninguna cuenta con ese correo electrónico.'];
         }
+
     }
 
     public function verificarToken()
