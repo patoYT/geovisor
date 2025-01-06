@@ -17,7 +17,6 @@ $(document).ready(function(){
     //Este es el que va a cambiar el formulario dependiendo de lo que seleccione
     $(document).on('change',"#tipoSolicitud",function(){
         //Aqui se obtiene el valor seleccionado
-    console.log("Si se esta cargando el evento de Change");
 
     let seleccion = $(this).val();
 
@@ -26,7 +25,6 @@ $(document).ready(function(){
 
     $('#formulario-dinamico').html('');
 
-    console.log("URL seleccionada: ", url);
 
         if (url){ //Aqui es para verifica que la url no este vacio 
             $.ajax({
