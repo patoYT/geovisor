@@ -17,7 +17,7 @@
 include_once '../lib/helpers.php';
 
 if (isset($_SESSION['errores']['iniciarsesion'])) {
-    if (isset(($_SESSION['errores']['iniciarsesion']['usu_incorrect']))) {
+    if (isset($_SESSION['errores'])) { // Sin paréntesis adicionales
 ?>
         <script>
             Swal.fire({
@@ -30,24 +30,24 @@ if (isset($_SESSION['errores']['iniciarsesion'])) {
     }
 }
 if (isset($_SESSION['errores']['registrar'])) {
-    if (isset(($_SESSION['errores']['registrar']['aceptado']))) {
+    if (isset($_SESSION['errores']['registrar']['aceptado'])) { // Sin paréntesis adicionales
     ?>
         <script>
             Swal.fire({
                 icon: "success",
                 title: "Completado",
-                text: "Se hizo el registro con exito"
+                text: "Se hizo el registro con éxito"
             });
         </script>
 <?php
-    } elseif(isset($_SESSION['errores']['registrar']['denegado'])){
+    } elseif (isset($_SESSION['errores']['registrar']['denegado'])) { // Sin paréntesis adicionales
         ?>
         <script>
             Swal.fire({
                 icon: "error",
                 title: "Error",
                 text: "No se pudo completar el registro"
-            })
+            });
         </script>
         <?php
     }

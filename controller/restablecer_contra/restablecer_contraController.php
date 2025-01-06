@@ -1,7 +1,5 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-
 include_once '../model/restablecer_contra/restablecer_contraModel.php';
 include_once '../lib/constant/errores.php';
 include_once 'assets/PHPMailer/PHPMailer.php';
@@ -50,31 +48,35 @@ class restablecer_contraController
     }
 
     public function EnviarToken()
-    {
-        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-        if (!$email) {
-            return ['success' => false, 'message' => 'Correo electrónico no proporcionado.'];
-        }
+{
+    // Validar y sanitizar el correo electrónico manualmente
+    $email = isset($_POST['email']) ? trim($_POST['email']) : null;
+    if (!$email || !preg_match('/^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$/', $email)) {
+        return array('success' => false, 'message' => 'Correo electrónico no proporcionado o no válido.');
+    }
 
-        $usuario = $this->obj->EncontrarUsuario($email);
-        if (!empty($usuario)) {
-            $token = $this->generarToken();
-            $fechadeexpiracion = date('Y-m-d H:i:s', strtotime('+1 hour'));
+    // Buscar al usuario por correo
+    $usuario = $this->obj->EncontrarUsuario($email);
+    if (!empty($usuario)) {
+        // Generar token y calcular fecha de expiración
+        $token = $this->generarToken();
+        $fechadeexpiracion = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
-            if ($this->obj->GuardarToken($usuario[0]['usu_id'], $token, $fechadeexpiracion)) {
-                if ($this->EnviarCorreo($email, $token)) {
-                    return ['success' => true, 'message' => 'Se ha enviado un código de verificación a tu correo electrónico.'];
-                } else {
-                    return ['success' => false, 'message' => ERROR_VERIFICACION_EMAIL];
-                }
+        // Guardar el token en la base de datos
+        if ($this->obj->GuardarToken($usuario[0]['usu_id'], $token, $fechadeexpiracion)) {
+            // Enviar el correo con el token
+            if ($this->EnviarCorreo($email, $token)) {
+                return array('success' => true, 'message' => 'Se ha enviado un código de verificación a tu correo electrónico.');
             } else {
-                return ['success' => false, 'message' => ERROR_GENERAL];
+                return array('success' => false, 'message' => ERROR_VERIFICACION_EMAIL);
             }
         } else {
-            return ['success' => false, 'message' => 'No se encontró ninguna cuenta con ese correo electrónico.'];
+            return array('success' => false, 'message' => ERROR_GENERAL);
         }
-
+    } else {
+        return array('success' => false, 'message' => 'No se encontró ninguna cuenta con ese correo electrónico.');
     }
+}
 
     public function verificarToken()
     {
@@ -82,7 +84,7 @@ class restablecer_contraController
         $code = filter_input(INPUT_POST, 'code', FILTER_SANITIZE_STRING);
 
         if (!$email || !$code) {
-            return ['success' => false, 'message' => 'Correo electrónico o código no proporcionado.'];
+             return ['success' => false, 'message' => 'Correo electrónico o código no proporcionado.'];
         }
 
         if ($this->obj->verificarToken($email, $code)) {

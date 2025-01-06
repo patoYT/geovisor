@@ -5,7 +5,8 @@ include_once '../controller/restablecer_contra/restablecer_contraController.php'
 $restablecer_contraController = new restablecer_contraController();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $response = ['success' => false, 'message' => ''];
+    // Crear una respuesta inicial
+    $response = array('success' => false, 'message' => '');
 
     if (isset($_POST['email'])) {
         $email = $_POST['email'];
@@ -22,10 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $response['message'] = 'Acción no válida';
     }
 
+    // Cabecera para indicar tipo de contenido
     header('Content-Type: application/json');
+
+    // Convertir el array a JSON manualmente (alternativa para JSON en PHP 5.2.5)
     echo json_encode($response);
     exit;
 }
 
+// Incluir la vista
 include_once '../view/restablecer_contra/cambiarContrasena.php';
 ?>

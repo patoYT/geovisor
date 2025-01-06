@@ -16,7 +16,7 @@ class AccesoController
             //Si se encuenta algun usuario
             foreach ($usuario as $usu) {
                 // password_verify es para comprobar si la contraseña proporcionada coincide con la contraseña almacenada en la base de datos 
-                if (password_verify($pass, $usu['usu_password'])) {
+                if ($pass == $usu['usu_password']) {
                     //Si la contraseña es correcta estabelezco las variables de session del nombre y el apellido
                     $_SESSION['Nombre'] =  $usu['usu_nombre'];
                     $_SESSION['Apellido'] =  $usu['usu_apellido'];

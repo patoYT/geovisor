@@ -35,8 +35,7 @@ class UsuariosController
         }else{
             $rol = 1;
         }
-        $clave = password_hash($usu_clave, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO usuarios (usu_td,usu_numerodocumento,usu_nombre,usu_apellido,usu_password,usu_correo,usu_telefono, usu_rol) VALUES($tipodedocumento,'$numerodocumento','$usu_nombre','$usu_apellido','$clave','$usu_correo','$telefono','$rol');";
+        $sql = "INSERT INTO usuarios (usu_td,usu_numerodocumento,usu_nombre,usu_apellido,usu_password,usu_correo,usu_telefono, usu_rol) VALUES($tipodedocumento,'$numerodocumento','$usu_nombre','$usu_apellido','$usu_clave','$usu_correo','$telefono','$rol');";
         $ejecutar = $obj->insert($sql);
         if ($ejecutar) {
             $_SESSION['errores']['registrar']['aceptado'] = "Se hizo el registro con exito";
